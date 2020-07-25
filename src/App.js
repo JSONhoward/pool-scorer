@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
+import { StraightPoolContext, FargoContext, straightPoolReducer, fargoReducer, appInitialState, straightPoolInitialState, fargoInitialState, AppContext, appReducer } from './store'
+import Layout from './components/Layout'
+import Home from './pages/Home'
+import Fargo from './pages/Fargo'
+import StraightPool from './pages/StraightPool'
+
+const App = () => {
+  const [appState, appDispatch] = useReducer(appReducer, appInitialState)
+  const [straightPoolState, straightPoolDispatch] = useReducer(straightPoolReducer, straightPoolInitialState)
+  const [fargoState, fargoDispatch] = useReducer(fargoReducer, fargoInitialState)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AppContext.Provider value={[appState, appDispatch]}>
+      <StraightPoolContext.Provider value={[straightPoolState, straightPoolDispatch]}>
+        <FargoContext.Provider value={[fargoState, fargoDispatch]}>
+          <Router>
+            <Switch>
+              <Layout>
+                <Route exact path='/' component={Home} />
+                <Route path='/fargo' component={Fargo} />
+                <Route path='/14.1' component={StraightPool} />
+              </Layout>
+            </Switch>
+          </Router>
+        </FargoContext.Provider>
+      </StraightPoolContext.Provider>
+    </AppContext.Provider>
+  )
 }
 
-export default App;
+export default App
