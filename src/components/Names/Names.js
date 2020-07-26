@@ -1,6 +1,6 @@
-import React, {useState, useContext} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import { StraightPoolContext, CHANGE_NAME } from '../../store'
+import {CHANGE_NAME } from '../../store'
 
 const Name = styled.input`
 width: 10rem;
@@ -13,7 +13,6 @@ background-color: ${props => props.edit ? 'white' : 'rgb(30,30,30)'};
 
 const NamesStyled = styled.div`
 position: relative;
-top: -20px;
 display: flex;
 justify-content: center;
 height: 2.5rem;
@@ -21,22 +20,22 @@ width: 95%;
 font-size: 1.5rem;
 color: white;
 margin-top: 3rem;
+margin-bottom: 1rem;
 
 ${Name}:hover {
     cursor: text;
 }
 `
 
-const Names = () => {
+const Names = ({state, dispatch}) => {
     const [editName1, setEditName1] = useState(false)
     const [editName2, setEditName2] = useState(false)
     const [names, setNames] = useState({name1: 'Player 1', name2: 'Player 2'})
-    const [straightPoolState, straightPoolDispatch] = useContext(StraightPoolContext)
 
-    const {players} = straightPoolState
+    const {players} = state
 
     const saveName = e => {
-        straightPoolDispatch({type: CHANGE_NAME, payload: {player: e.target.name, name: names[e.target.name]}})
+        dispatch({type: CHANGE_NAME, payload: {player: e.target.name, name: names[e.target.name]}})
         setEditName1(false)
     }
 

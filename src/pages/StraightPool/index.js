@@ -2,11 +2,12 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 import { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, NEXT } from '../../store'
-import { StraightPoolContext, AppContext } from '../../store'
+import { StraightPoolContext } from '../../store'
 import Modal from '../../components/Modal/Modal'
 import Names from '../../components/Names/Names'
 import Scores from '../../components/Scores/Scores'
 import Stats from '../../components/Stats/Stats'
+import Button from '../../components/Button/Button'
 
 const StraightPoolStyled = styled.div`
 display: flex;
@@ -15,20 +16,8 @@ align-items: center;
 justify-content: center;
 height: 100%;
 width: 100%;
-place-items: center;
 color: white;
 text-shadow: 1px 1px 5px black;
-`
-
-const Button = styled.button`
-height: 3rem;
-margin: 5px;
-width: ${props => props.width || '12.5rem'};
-font-size: 2rem;
-border-radius: 5px;
-box-shadow: 1px 1px 5px black;
-border: none;
-background-color: white;
 `
 
 const ButtonDiv = styled.div`
@@ -42,10 +31,7 @@ flex-wrap: wrap;
 
 const StraightPool = () => {
     const [straightPoolState, straightPoolDispatch] = useContext(StraightPoolContext)
-    // eslint-disable-next-line
-    const [appState, appDispatch] = useContext(AppContext)
-
-    const { players } = straightPoolState
+    const { players, currentRun, ballsRemaining, runs1, runs2, fouls1, fouls2, player1, score1, score2, newGameModalOpen } = straightPoolState
 
     const handleButton = (e, type) => {
         e.preventDefault()
@@ -54,19 +40,34 @@ const StraightPool = () => {
 
     return (
         <>
-            <Modal />
+            <Modal open={newGameModalOpen} dispatch={straightPoolDispatch} />
             <StraightPoolStyled>
-                <Names />
-                <Scores />
-                <Stats />
+                <Names state={straightPoolState} dispatch={straightPoolDispatch} />
+                <Scores score1={score1} score2={score2} players={players} player1={player1} />
+                <Stats stat={ballsRemaining} statLabel={'Balls Remaining'} />
+                <Stats stat={currentRun} statLabel={'Current Run'} />
+                {
+                    players === 1 ?
+                        (
+                            <>
+                                <Stats stat={Math.max(...runs1)} statLabel={'High Run'} />
+                                <Stats stat={fouls1} statLabel={'On Foul'} />
+                            </>
+                        )
+                        :
+                        (
+                            <>
+                                <Stats stat={player1 ? Math.max(...runs1) : Math.max(...runs2)} statLabel={'High Run'} />
+                                <Stats stat={player1 ? fouls1 : fouls2} statLabel={'On Foul'} />
+                            </>
+                        )
+                }
                 <ButtonDiv>
-                    <Button width={'6rem'} onClick={(e) => handleButton(e, DECREMENT)}>-</Button>
-                    <Button width={'6rem'} onClick={(e) => handleButton(e, INCREMENT)}>+</Button>
-                    <Button onClick={(e) => handleButton(e, NEXT)}>
-                        {players === 1 ? 'Missed' : 'Next Player'}
-                    </Button>
-                    <Button onClick={(e) => handleButton(e, FOUL)}>Foul</Button>
-                    <Button onClick={() => appDispatch({ type: OPEN_MODAL })}>New Game</Button>
+                    <Button width={'6rem'} handler={(e) => handleButton(e, DECREMENT)} text={'-'} />
+                    <Button width={'6rem'} handler={(e) => handleButton(e, INCREMENT)} text={'+'} />
+                    <Button handler={(e) => handleButton(e, NEXT)} text={players === 1 ? 'Missed' : 'Next Player'} />
+                    <Button handler={(e) => handleButton(e, FOUL)} text={'Foul'} />
+                    <Button handler={(e) => handleButton(e,OPEN_MODAL)} text={'New Game'} />
                 </ButtonDiv>
             </StraightPoolStyled>
         </>

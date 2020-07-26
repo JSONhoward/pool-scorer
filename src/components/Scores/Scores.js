@@ -1,6 +1,5 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { StraightPoolContext } from '../../store'
 
 const ScoresBox = styled.div`
 display: flex;
@@ -20,23 +19,19 @@ margin: 0 5px;
 border-radius: 10px;
 `
 
-const Scores = () => {
-    const [straightPoolState, straightPoolDispatch] = useContext(StraightPoolContext)
-
-    const {players, score1, score2, player1} = straightPoolState
-
+const Scores = ({ players, score1, score2, player1 }) => {
     return (
         <ScoresBox>
-                    {
-                        players === 1 ? (<CurrentScore>{score1}</CurrentScore>) :
-                            (
-                                <>
-                                    <CurrentScore scoreOpacity={!player1}>{score1}</CurrentScore>
-                                    <CurrentScore scoreOpacity={player1}>{score2}</CurrentScore>
-                                </>
-                            )
-                    }
-                </ScoresBox>
+            {
+                players === 1 ? (<CurrentScore>{score1}</CurrentScore>) :
+                    (
+                        <>
+                            <CurrentScore scoreOpacity={!player1}>{score1}</CurrentScore>
+                            <CurrentScore scoreOpacity={player1}>{score2}</CurrentScore>
+                        </>
+                    )
+            }
+        </ScoresBox>
     )
 }
 

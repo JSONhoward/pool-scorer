@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { AppContext, CANCEL, NEW_GAME, StraightPoolContext, RESET } from '../../store'
+import { CANCEL, NEW_GAME, RESET } from '../../store'
 
 const ModalStyled = styled.div`
 position: absolute;
@@ -40,25 +40,19 @@ border: 1px solid black;
 background-color: white;
 `
 
-const Modal = () => {
+const Modal = ({ open, dispatch }) => {
     const [choosePlayers, setChoosePlayers] = useState(false)
-    const [appState, appDispatch] = useContext(AppContext)
-    // eslint-disable-next-line
-    const [straightPoolState, straightPoolDispatch] = useContext(StraightPoolContext)
 
     const handleNewGame = (type, payload = null) => {
-        if (type === CANCEL) {
-            setChoosePlayers(false)
-            appDispatch({ type })
-        }
+        setChoosePlayers(false)
+        dispatch({ type })
         if (type === NEW_GAME) {
-            appDispatch({ type })
-            straightPoolDispatch({ type: RESET, payload })
+            dispatch({ type: RESET, payload })
         }
     }
 
     return (
-        <ModalStyled modalHeight={choosePlayers} open={appState.newGameModalOpen}>
+        <ModalStyled modalHeight={choosePlayers} open={open}>
             {
                 choosePlayers ? (<Text>Players?</Text>) : (<Text>Start New Game?</Text>)
             }
