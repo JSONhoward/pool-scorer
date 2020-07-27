@@ -31,7 +31,7 @@ flex-wrap: wrap;
 
 const Fargo = () => {
     const [fargoState, fargoDispatch] = useContext(FargoContext)
-    const { inning, player1, inningScore, inOrder, players, scores1, scores2, newGameModalOpen, ballsRemaining } = fargoState
+    const { inning, player1, inOrder, players, scores1, scores2, newGameModalOpen, ballsRemaining } = fargoState
 
     const handleButton = (e, type) => {
         e.preventDefault()

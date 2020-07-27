@@ -24,13 +24,13 @@ const types = {
 export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, ROTATE } = types
 
 //? Initial State
-export const appInitialState = {
+export const appInitialState = localStorage.appState ? JSON.parse(localStorage.appState) : {
     menuOpen: false
 }
 
-export const straightPoolInitialState = {
-    playerName1: 'Player 1',
-    playerName2: 'Player 2',
+export const straightPoolInitialState = localStorage.straightPoolState ? JSON.parse(localStorage.straightPoolState) : {
+    playerName1: '',
+    playerName2: '',
     score1: 0,
     score2: 0,
     fouls1: 0,
@@ -44,9 +44,9 @@ export const straightPoolInitialState = {
     newGameModalOpen: false
 }
 
-export const fargoInitialState = {
-    playerName: 'Player 1',
-    playerName2: 'Player 2',
+export const fargoInitialState = localStorage.fargoState ? JSON.parse(localStorage.fargoState) : {
+    playerName1: '',
+    playerName2: '',
     scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     inning: [1, 1],
@@ -62,9 +62,11 @@ export const appReducer = (state, action) => {
     switch (action.type) {
         case OPEN_MENU:
             state = { ...state, menuOpen: true }
+            localStorage.appState = JSON.stringify(state)
             return state
         case CLOSE_MENU:
             state = { ...state, menuOpen: false }
+            localStorage.appState = JSON.stringify(state)
             return state
         default:
             return state
@@ -82,6 +84,7 @@ export const straightPoolReducer = (state, action) => {
                     currentRun: state.currentRun + 1,
                     fouls1: 0
                 }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             } else {
                 state = {
@@ -91,6 +94,7 @@ export const straightPoolReducer = (state, action) => {
                     currentRun: state.currentRun + 1,
                     fouls2: 0
                 }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             }
         case DECREMENT:
@@ -101,6 +105,7 @@ export const straightPoolReducer = (state, action) => {
                     ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15,
                     currentRun: state.currentRun !== 0 ? state.currentRun - 1 : 0
                 }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             } else {
                 state = {
@@ -109,6 +114,7 @@ export const straightPoolReducer = (state, action) => {
                     ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15,
                     currentRun: state.currentRun !== 0 ? state.currentRun - 1 : 0
                 }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             }
         case FOUL:
@@ -121,6 +127,7 @@ export const straightPoolReducer = (state, action) => {
                     runs1: runArr,
                     currentRun: 0
                 }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             } else {
                 if (state.player1) {
@@ -133,6 +140,7 @@ export const straightPoolReducer = (state, action) => {
                         currentRun: 0,
                         player1: !state.player1
                     }
+                    localStorage.straightPoolState = JSON.stringify(state)
                     return state
                 } else {
                     let runArr = [...state.runs2, state.currentRun]
@@ -144,6 +152,7 @@ export const straightPoolReducer = (state, action) => {
                         currentRun: 0,
                         player1: !state.player1
                     }
+                    localStorage.straightPoolState = JSON.stringify(state)
                     return state
                 }
             }
@@ -155,6 +164,7 @@ export const straightPoolReducer = (state, action) => {
                     runs1: runArr,
                     currentRun: 0
                 }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             } else {
                 let runArr = [...state.runs2, state.currentRun]
@@ -165,6 +175,7 @@ export const straightPoolReducer = (state, action) => {
                         runs1: runArr,
                         currentRun: 0
                     }
+                    localStorage.straightPoolState = JSON.stringify(state)
                     return state
                 } else {
                     state = {
@@ -173,33 +184,67 @@ export const straightPoolReducer = (state, action) => {
                         runs2: runArr,
                         currentRun: 0
                     }
+                    localStorage.straightPoolState = JSON.stringify(state)
                     return state
                 }
             }
         case RESET:
             if (action.payload === 1) {
-                state = { ...straightPoolInitialState }
+                state = {
+                    ...straightPoolInitialState,
+                    score1: 0,
+                    score2: 0,
+                    fouls1: 0,
+                    fouls2: 0,
+                    ballsRemaining: 15,
+                    runs1: [0],
+                    runs2: [0],
+                    currentRun: 0,
+                    players: 1,
+                    player1: true,
+                    newGameModalOpen: false
+                }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             } else {
-                state = { ...straightPoolInitialState, players: 2 }
+                state = {
+                    ...straightPoolInitialState,
+                    score1: 0,
+                    score2: 0,
+                    fouls1: 0,
+                    fouls2: 0,
+                    ballsRemaining: 15,
+                    runs1: [0],
+                    runs2: [0],
+                    currentRun: 0,
+                    players: 2,
+                    player1: true,
+                    newGameModalOpen: false
+                }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             }
         case CHANGE_NAME:
             if (action.payload.player === 'name1') {
                 state = { ...state, playerName1: action.payload.name }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             } else {
                 state = { ...state, playerName2: action.payload.name }
+                localStorage.straightPoolState = JSON.stringify(state)
                 return state
             }
         case OPEN_MODAL:
             state = { ...state, newGameModalOpen: !state.newGameModalOpen }
+            localStorage.straightPoolState = JSON.stringify(state)
             return state
         case NEW_GAME:
             state = { ...state, newGameModalOpen: false }
+            localStorage.straightPoolState = JSON.stringify(state)
             return state
         case CANCEL:
             state = { ...state, newGameModalOpen: false }
+            localStorage.straightPoolState = JSON.stringify(state)
             return state
         default:
             return state
@@ -212,25 +257,29 @@ export const fargoReducer = (state, action) => {
             if (state.player1) {
                 if (state.inOrder[0]) {
                     let arr = [...state.scores1]
-                    if(state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 2
+                    if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 2
                     state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                    localStorage.fargoState = JSON.stringify(state)
                     return state
                 } else {
                     let arr = [...state.scores1]
-                    if(state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
+                    if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
                     state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                    localStorage.fargoState = JSON.stringify(state)
                     return state
                 }
             } else {
                 if (state.inOrder[1]) {
                     let arr = [...state.scores2]
-                    if(state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 2
+                    if (state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 2
                     state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                    localStorage.fargoState = JSON.stringify(state)
                     return state
                 } else {
                     let arr = [...state.scores2]
-                    if(state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 1
+                    if (state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 1
                     state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                    localStorage.fargoState = JSON.stringify(state)
                     return state
                 }
             }
@@ -239,61 +288,74 @@ export const fargoReducer = (state, action) => {
                 let arr = [...state.scores1]
                 arr[state.inning[0] - 1] !== 0 ? arr[state.inning[0] - 1] -= 1 : arr[state.inning[0] - 1] = 0
                 state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15 }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             } else {
                 let arr = [...state.scores2]
                 arr[state.inning[1] - 1] !== 0 ? arr[state.inning[1] - 1] -= 1 : arr[state.inning[1] - 1] = 0
                 state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15 }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             }
         case ROTATE:
             let arr = [...state.inOrder]
             arr[state.player1 ? 0 : 1] = true
             state = { ...state, inOrder: arr }
+            localStorage.fargoState = JSON.stringify(state)
             return state
         case NEXT:
             if (state.players === 1) {
                 let arr = [...state.inning]
                 arr[0] !== 10 ? arr[0] += 1 : arr[0] = 10
                 state = { ...state, inOrder: [false, false], inning: arr, ballsRemaining: 15 }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             } else {
                 if (state.player1) {
                     let arr = [...state.inning]
                     arr[0] !== 10 ? arr[0] += 1 : arr[0] = 10
                     state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15 }
+                    localStorage.fargoState = JSON.stringify(state)
                     return state
                 } else {
                     let arr = [...state.inning]
                     arr[1] !== 10 ? arr[1] += 1 : arr[1] = 10
                     state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15 }
+                    localStorage.fargoState = JSON.stringify(state)
                     return state
                 }
             }
         case RESET:
             if (action.payload === 1) {
                 state = { ...fargoInitialState }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             } else {
                 state = { ...fargoInitialState, players: 2 }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             }
         case CHANGE_NAME:
             if (action.payload.player === 'name1') {
                 state = { ...state, playerName1: action.payload.name }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             } else {
                 state = { ...state, playerName2: action.payload.name }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
             }
         case OPEN_MODAL:
             state = { ...state, newGameModalOpen: !state.newGameModalOpen }
+            localStorage.fargoState = JSON.stringify(state)
             return state
         case NEW_GAME:
             state = { ...state, newGameModalOpen: false }
+            localStorage.fargoState = JSON.stringify(state)
             return state
         case CANCEL:
             state = { ...state, newGameModalOpen: false }
+            localStorage.fargoState = JSON.stringify(state)
             return state
         default:
             return state

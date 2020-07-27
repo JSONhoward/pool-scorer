@@ -7,7 +7,7 @@ const InningBoxStyledLeft = styled.div`
 position: fixed;
 top: 4rem;
 left: ${props => props.px + 'px'};
-height: 265px;
+height: 250px;
 width: 100px;
 background-color: white;
 border-bottom-right-radius: 10px;
@@ -19,7 +19,7 @@ const InningBoxStyledRight = styled.div`
 position: fixed;
 top: 4rem;
 right: ${props => props.px + 'px'};
-height: 265px;
+height: 250px;
 width: 100px;
 background-color: white;
 border-bottom-left-radius: 10px;
@@ -31,13 +31,14 @@ const TabLeft = styled.div`
 position: relative;
 display: grid;
 place-items: center;
-right: -100px;
+right: -99px;
 height: 50px;
 width: 50px;
 color: black;
 background-color: white;
 border-top-right-radius: 10px;
 border-bottom-right-radius: 10px;
+cursor: pointer;
 
 p {
 position: absolute;
@@ -57,6 +58,7 @@ color: black;
 background-color: white;
 border-top-left-radius: 10px;
 border-bottom-left-radius: 10px;
+cursor: pointer;
 
 p {
 position: absolute;
@@ -66,13 +68,14 @@ font-size: small;
 `
 
 const Table = styled.table`
-position: absolute;
-top: 50%;
+position: relative;
+top: 75px;
 left: 50%;
+height: 250px;
 width: 100px;
 transform: translate(-50%, -50%);
 color: black;
-font-size: 1.125rem;
+font-size: 1rem;
 border: 1px solid black;
 border-spacing: 0px;
 text-align: center;
@@ -184,10 +187,10 @@ const InningBox = ({ players, scores }) => {
             {
                 players === 1 ? (
                     <InningBoxStyledLeft px={pixelsLeft} ref={inningsTab}>
-                        <TabLeft>
+                        <TabLeft onClick={isOpenLeft ? closeLeft : openLeft}>
                             <p>Innings</p>
                             {
-                                isOpenLeft ? <FaMinus onClick={closeLeft} /> : <FaPlus onClick={openLeft} />
+                                isOpenLeft ? <FaMinus /> : <FaPlus />
                             }
                         </TabLeft>
                         <Table left={true}>
@@ -205,10 +208,10 @@ const InningBox = ({ players, scores }) => {
                     (
                         <>
                             <InningBoxStyledLeft px={pixelsLeft} ref={inningsTab}>
-                                <TabLeft>
+                                <TabLeft onClick={isOpenLeft ? closeLeft : openLeft}>
                                     <p>Innings</p>
                                     {
-                                        isOpenLeft ? <FaMinus onClick={closeLeft} /> : <FaPlus onClick={openLeft} />
+                                        isOpenLeft ? <FaMinus /> : <FaPlus />
                                     }
                                 </TabLeft>
                                 <Table left={true}>
@@ -222,10 +225,10 @@ const InningBox = ({ players, scores }) => {
                                 </Table>
                             </InningBoxStyledLeft>
                             <InningBoxStyledRight px={pixelsRight} ref={inningsTab}>
-                                <TabRight>
+                                <TabRight onClick={isOpenRight ? closeRight : openRight}>
                                     <p>Innings</p>
                                     {
-                                        isOpenRight ? <FaMinus onClick={closeRight} /> : <FaPlus onClick={openRight} />
+                                        isOpenRight ? <FaMinus /> : <FaPlus />
                                     }
                                 </TabRight>
                                 <Table left={false}>

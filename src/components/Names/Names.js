@@ -30,9 +30,9 @@ ${Name}:hover {
 const Names = ({state, dispatch}) => {
     const [editName1, setEditName1] = useState(false)
     const [editName2, setEditName2] = useState(false)
-    const [names, setNames] = useState({name1: 'Player 1', name2: 'Player 2'})
+    const [names, setNames] = useState({name1: '', name2: ''})
 
-    const {players} = state
+    const {players, playerName1, playerName2} = state
 
     const saveName = e => {
         dispatch({type: CHANGE_NAME, payload: {player: e.target.name, name: names[e.target.name]}})
@@ -48,12 +48,12 @@ const Names = ({state, dispatch}) => {
             {
                 players === 1 ?
                     (
-                        <Name name='name1' edit={editName1} onFocus={() => setEditName1(true)} onBlur={e => saveName(e)} type='text' value={names.name1} onChange={e => handleName(e)} title='Edit' />
+                        <Name name='name1' edit={editName1} onFocus={() => setEditName1(true)} onBlur={e => saveName(e)} type='text' defaultValue={playerName1 === '' ? 'Player 1' : playerName1} onChange={e => handleName(e)} title='Edit' />
                     ) :
                     (
                         <>
-                            <Name name='name1' edit={editName1} onFocus={() => setEditName1(true)} onBlur={e => saveName(e)} type='text' value={names.name1} onChange={e => handleName(e)} title='Edit' />
-                            <Name name='name2' edit={editName2} onFocus={() => setEditName2(true)} onBlur={e => saveName(e)} type='text' value={names.name2} onChange={e => handleName(e)} title='Edit' />
+                            <Name name='name1' edit={editName1} onFocus={() => setEditName1(true)} onBlur={e => saveName(e)} type='text' defaultValue={playerName1 === '' ? 'Player 1' : playerName1} onChange={e => handleName(e)} title='Edit' />
+                            <Name name='name2' edit={editName2} onFocus={() => setEditName2(true)} onBlur={e => saveName(e)} type='text' defaultValue={playerName2 === '' ? 'Player 2' : playerName2} onChange={e => handleName(e)} title='Edit' />
                         </>
                     )
             }

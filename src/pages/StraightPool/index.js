@@ -50,14 +50,14 @@ const StraightPool = () => {
                     players === 1 ?
                         (
                             <>
-                                <Stats stat={Math.max(...runs1)} statLabel={'High Run'} />
+                                <Stats stat={runs1.length === 1 ? currentRun : Math.max(...runs1)} statLabel={'High Run'} />
                                 <Stats stat={fouls1} statLabel={'On Foul'} />
                             </>
                         )
                         :
                         (
                             <>
-                                <Stats stat={player1 ? Math.max(...runs1) : Math.max(...runs2)} statLabel={'High Run'} />
+                                <Stats stat={player1 ? runs1.length === 1 ? currentRun : Math.max(...runs1) : runs2.length === 1 ? currentRun : Math.max(...runs2)} statLabel={'High Run'} />
                                 <Stats stat={player1 ? fouls1 : fouls2} statLabel={'On Foul'} />
                             </>
                         )
