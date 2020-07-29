@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import Menu from '../Menu/Menu'
 import { AppContext, CLOSE_MENU, OPEN_MENU } from '../../store'
@@ -11,21 +11,21 @@ font-family: 'Cabin', sans-serif;
 `
 
 const Layout = ({ children }) => {
-    const [right, setRight] = useState(-10)
+    const [right, setRight] = useState(-7)
     const [appState, appDispatch] = useContext(AppContext)
-    const {menuOpen, } = appState
+    const { menuOpen, } = appState
 
     const closeMenu = event => {
-        if(menuOpen && event.target.getAttribute('name') !== 'nav') {
+        if (menuOpen && event.target.getAttribute('name') !== 'nav') {
             appDispatch({ type: CLOSE_MENU })
 
             let obj = {
                 val: 0
             }
-    
+
             anime({
                 targets: obj,
-                val: -10,
+                val: -7,
                 autoplay: false,
                 loop: false,
                 easing: 'linear',
@@ -36,19 +36,19 @@ const Layout = ({ children }) => {
     }
 
     const handleMenu = action => {
-        if(action === 'close') {
+        if (action === 'close') {
             appDispatch({ type: CLOSE_MENU })
-        }else {
+        } else {
             appDispatch({ type: OPEN_MENU })
         }
 
         let obj = {
-            val: menuOpen ? 0 : -10
+            val: menuOpen ? 0 : -7
         }
 
         anime({
             targets: obj,
-            val: menuOpen ? -10 : 0,
+            val: menuOpen ? -7 : 0,
             autoplay: false,
             loop: false,
             easing: 'linear',
@@ -60,7 +60,7 @@ const Layout = ({ children }) => {
     return (
         <LayoutStyled onClick={e => closeMenu(e)}>
             <Menu right={right} handleMenu={handleMenu} />
-            {children}
+                {children}
         </LayoutStyled>
     )
 }

@@ -5,7 +5,7 @@ import anime from 'animejs/lib/anime.es.js'
 
 const InningBoxStyledLeft = styled.div`
 position: fixed;
-top: 4rem;
+top: 3.5rem;
 left: ${props => props.px + 'px'};
 height: 250px;
 width: 100px;
@@ -17,7 +17,7 @@ margin: auto 0;
 
 const InningBoxStyledRight = styled.div`
 position: fixed;
-top: 4rem;
+top: 3.5rem;
 right: ${props => props.px + 'px'};
 height: 250px;
 width: 100px;

@@ -6,9 +6,9 @@ import { useLocation, Link } from 'react-router-dom'
 import { AppContext } from '../../store'
 
 const MenuStyled = styled.div`
-position: fixed;
+position: relative;
 height: 3rem;
-width: 100%;
+width: 100vw;
 display: grid;
 place-items: center;
 padding: 10px;
@@ -25,27 +25,28 @@ text-transform: uppercase;
 
 const Hamburger = styled.div`
 position: absolute;
-right: 10px;
+right: 25px;
 cursor: pointer;
 `
 
 const Nav = styled.nav`
 position: absolute;
-display: ${props => props.right !== -10 ? 'flex' : 'none'};
+display: ${props => props.right !== -7 ? 'flex' : 'none'};
 justify-content: center;
 top: 3rem;
 right: ${props => props.right + 'rem'};
-height: 20rem;
-width: 10rem;
+height: 10rem;
+width: 7rem;
 background-color: rgb(0,0,0,.9);
 border-bottom: 2px solid white;
 border-left: 2px solid white;
 border-bottom-left-radius: 10px;
+z-index: 1;
 `
 
 const Ul = styled.ul`
 color: white;
-font-size: 3rem;
+font-size: 2rem;
 list-style-type: none;
 
 a, a:visited {
@@ -70,6 +71,10 @@ const navMenuItems = [
     {
         name: 'Fargo',
         link: '/fargo'
+    },
+    {
+        name: 'Match',
+        link: '/match'
     }
 ]
 
@@ -90,19 +95,21 @@ const Menu = ({ right, handleMenu }) => {
     })
 
     return (
-        <MenuStyled>
-            <Title>{location.pathname.slice(1)}</Title>
-            <Hamburger>
-                {
-                    menuOpen ? <FaTimes onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars onClick={() => handleMenu('open')} size={'2rem'} />
-                }
-            </Hamburger>
+        <>
+            <MenuStyled>
+                <Title>{location.pathname.slice(1)}</Title>
+                <Hamburger>
+                    {
+                        menuOpen ? <FaTimes onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars onClick={() => handleMenu('open')} size={'2rem'} />
+                    }
+                </Hamburger>
+            </MenuStyled>
             <Nav name={'nav'} open={menuOpen} right={right}>
                 <Ul name={'nav'}>
                     {navItems}
                 </Ul>
             </Nav>
-        </MenuStyled>
+        </>
     )
 }
 

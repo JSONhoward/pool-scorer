@@ -17,7 +17,7 @@ height: 100%;
 width: 100%;
 color: white;
 text-shadow: 1px 1px 5px black;
-padding-top: 5rem;
+padding-top: 3rem;
 `
 
 const ButtonDiv = styled.div`
@@ -44,7 +44,7 @@ const Fargo = () => {
             <FargoStyled>
                 <Names state={fargoState} dispatch={fargoDispatch} />
                 <Scores score1={scores1?.reduce((a, b) => a + b)} score2={scores2?.reduce((a, b) => a + b)} players={players} player1={player1} />
-                <Stats stat={inning[player1 ? 0 : 1]} statLabel={"Inning"} />
+                <Stats stat={inning[player1 ? 0 : 1] === 11 ? 10 : inning[player1 ? 0 : 1]} statLabel={"Inning"} />
                 <Stats stat={player1 ? scores1[inning[0] - 1] : scores2[inning[1] - 1]} statLabel={"Inning Score"} />
                 <Stats stat={ballsRemaining} statLabel={'Balls Remaining'} />
                 <ButtonDiv>

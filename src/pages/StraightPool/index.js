@@ -13,11 +13,12 @@ const StraightPoolStyled = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
-justify-content: center;
+justify-content: flex-start;
 height: 100%;
 width: 100%;
 color: white;
 text-shadow: 1px 1px 5px black;
+padding-top: 2rem;
 `
 
 const ButtonDiv = styled.div`

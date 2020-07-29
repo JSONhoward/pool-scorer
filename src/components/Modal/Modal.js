@@ -21,7 +21,9 @@ box-shadow: 1px 1px 5px black;
 `
 
 const Text = styled.p`
+font-weight: bold;
 margin: 15px auto;
+text-shadow: 1px 1px 5px black;
 `
 
 const ButtonBox = styled.div`
