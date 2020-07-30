@@ -18,6 +18,7 @@ color: white;
 backdrop-filter: blur(5px);
 background-color: rgba(0,0,0,.9);
 box-shadow: 1px 1px 5px black;
+z-index: 1;
 `
 
 const Text = styled.p`

@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { FaPlus, FaMinus } from 'react-icons/fa'
 import anime from 'animejs/lib/anime.es.js'
 
+const animDuration = 500
+
 const InningBoxStyledLeft = styled.div`
 position: fixed;
 top: 3.5rem;
@@ -107,7 +109,7 @@ const InningBox = ({ players, scores }) => {
             px: 0,
             autoplay: false,
             loop: false,
-            duration: 1000,
+            duration: animDuration,
             easing: 'easeInOutSine',
             update: () => setPixelsLeft(obj.px)
         }).play()
@@ -124,7 +126,7 @@ const InningBox = ({ players, scores }) => {
             px: -100,
             autoplay: false,
             loop: false,
-            duration: 1000,
+            duration: animDuration,
             easing: 'easeInOutSine',
             update: () => setPixelsLeft(obj.px)
         }).play()
@@ -141,7 +143,7 @@ const InningBox = ({ players, scores }) => {
             px: 0,
             autoplay: false,
             loop: false,
-            duration: 1000,
+            duration: animDuration,
             easing: 'easeInOutSine',
             update: () => setPixelsRight(obj.px)
         }).play()
@@ -158,7 +160,7 @@ const InningBox = ({ players, scores }) => {
             px: -100,
             autoplay: false,
             loop: false,
-            duration: 1000,
+            duration: animDuration,
             easing: 'easeInOutSine',
             update: () => setPixelsRight(obj.px)
         }).play()

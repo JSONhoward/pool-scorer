@@ -15,7 +15,7 @@ background-color: white;
 margin: .5rem;
 border-radius: 10px;
 border: 1px solid black;
-overflow-y: scroll;
+overflow-y: auto;
 `
 
 const WinListDiv = styled.div`

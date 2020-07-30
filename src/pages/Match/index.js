@@ -6,6 +6,7 @@ import { MatchContext, WIN, LOSS, OPEN_MODAL } from '../../store'
 import SetBox from '../../components/SetBox/SetBox'
 import Button from '../../components/Button/Button'
 import MatchModal from '../../components/Modal/MatchModal'
+import BreakBox from '../../components/BreakBox/BreakBox'
 
 const MatchStyled = styled.div`
 display: flex;
@@ -28,20 +29,9 @@ padding: 0px;
 flex-wrap: wrap;
 `
 
-const BreakDiv = styled.div`
-display: flex;
-justify-content: space-between;
-width: 220px;
-font-size: 2rem;
-`
-
-const BreakP = styled.p`
-visibility: ${props => props.break ? 'visible' : 'hidden'};
-`
-
 const Match = () => {
     const [matchState, matchDispatch] = useContext(MatchContext)
-    const { newGameModalOpen, scores1, scores2, players, player1, raceTo } = matchState
+    const { newGameModalOpen, scores1, scores2, players, player1, raceTo, gameOver } = matchState
 
     const handleButton = (e, type) => {
         e.preventDefault()
@@ -52,12 +42,9 @@ const Match = () => {
         <>
             <MatchModal open={newGameModalOpen} dispatch={matchDispatch} />
             <MatchStyled>
-                <Names state={matchState} dispatch={matchDispatch} />
-                <Scores raceTo={raceTo} match={true} score1={scores1[0] !== null ? scores1.reduce((a, b) => a + b) : 0} score2={scores2[0] !== null ? scores2.reduce((a, b) => a + b) : 0} players={players} player1={player1} />
-                <BreakDiv>
-                <BreakP break={player1}>Break</BreakP>
-                <BreakP break={!player1}>Break</BreakP>
-                </BreakDiv>
+                <Names state={matchState} dispatch={matchDispatch} gameOver={gameOver} />
+                <Scores gameOver={gameOver} raceTo={raceTo} match={true} score1={scores1[0] !== null ? scores1.reduce((a, b) => a + b) : 0} score2={scores2[0] !== null ? scores2.reduce((a, b) => a + b) : 0} players={players} player1={player1} />
+                <BreakBox gameOver={gameOver} player1={player1} />
                 <ButtonDiv>
                 <Button width={'6rem'} handler={(e) => handleButton(e, WIN)} text={'Win'} />
                 <Button width={'6rem'} handler={(e) => handleButton(e, LOSS)} text={'Loss'} />

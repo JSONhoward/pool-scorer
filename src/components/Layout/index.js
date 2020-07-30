@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import Menu from '../Menu/Menu'
+import Help from '../Help/Help'
 import { AppContext, CLOSE_MENU, OPEN_MENU } from '../../store'
 import anime from 'animejs/lib/anime.es.js'
 
 const LayoutStyled = styled.div`
-height: 100vh;
+height: calc(100vh - 3rem);
 width: 100vw;
 font-family: 'Cabin', sans-serif;
 `
@@ -58,10 +59,13 @@ const Layout = ({ children }) => {
     }
 
     return (
+        <>
         <LayoutStyled onClick={e => closeMenu(e)}>
             <Menu right={right} handleMenu={handleMenu} />
                 {children}
         </LayoutStyled>
+        <Help />
+        </>
     )
 }
 
