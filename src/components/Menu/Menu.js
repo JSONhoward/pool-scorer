@@ -20,12 +20,13 @@ z-index: 10;
 
 const Title = styled.h1`
 position: absolute;
+font-size: 1.5rem;
 text-transform: uppercase;
 `
 
 const Hamburger = styled.div`
 position: absolute;
-right: 25px;
+right: 20px;
 cursor: pointer;
 `
 
@@ -36,7 +37,7 @@ justify-content: center;
 top: 3rem;
 right: ${props => props.right + 'rem'};
 height: 10rem;
-width: 7rem;
+width: 10rem;
 background-color: rgb(0,0,0,.9);
 border-bottom: 2px solid white;
 border-left: 2px solid white;
@@ -46,7 +47,7 @@ z-index: 1;
 
 const Ul = styled.ul`
 color: white;
-font-size: 2rem;
+font-size: 1.5rem;
 list-style-type: none;
 
 a, a:visited {
@@ -73,8 +74,12 @@ const navMenuItems = [
         link: '/fargo'
     },
     {
-        name: 'Match',
-        link: '/match'
+        name: 'Equal Offense',
+        link: '/equal-offense'
+    },
+    {
+        name: 'VS.',
+        link: '/vs'
     }
 ]
 
@@ -97,7 +102,7 @@ const Menu = ({ right, handleMenu }) => {
     return (
         <>
             <MenuStyled>
-                <Title>{location.pathname.slice(1)}</Title>
+                <Title>{location.pathname.slice(1) === '' ? 'Pocket Pool' : location.pathname.slice(1)}</Title>
                 <Hamburger>
                     {
                         menuOpen ? <FaTimes onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars onClick={() => handleMenu('open')} size={'2rem'} />

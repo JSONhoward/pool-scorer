@@ -5,6 +5,7 @@ export const AppContext = createContext()
 export const StraightPoolContext = createContext()
 export const FargoContext = createContext()
 export const MatchContext = createContext()
+export const EqualOffenseContext = createContext()
 
 //? Types
 const types = {
@@ -56,6 +57,19 @@ export const fargoInitialState = localStorage.fargoState ? JSON.parse(localStora
     players: 1,
     player1: true,
     inOrder: [false, false],
+    ballsRemaining: 15,
+    gameOver: false,
+    newGameModalOpen: false
+}
+
+export const equalOffenseInitialState = {
+    playerName1: '',
+    playerName2: '',
+    scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    inning: [1, 1],
+    players: 1,
+    player1: true,
     ballsRemaining: 15,
     gameOver: false,
     newGameModalOpen: false
@@ -342,22 +356,19 @@ export const fargoReducer = (state, action) => {
             return state
         case NEXT:
             if (state.players === 1 && !state.gameOver) {
-                if (!state.gameOver) {
-                    let arr = [...state.inning]
-                    arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
-                    state = { ...state, inOrder: [false, false], inning: arr, ballsRemaining: 15, gameOver: state.inning[0] === 10 ? true : false }
-                    localStorage.fargoState = JSON.stringify(state)
-                    return state
-                }
+                let arr = [...state.inning]
+                arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
+                state = { ...state, inOrder: [false, false], inning: arr, ballsRemaining: 15, gameOver: state.inning[0] === 10 ? true : false }
+                localStorage.fargoState = JSON.stringify(state)
                 return state
-            } else if(!state.gameOver) {
+            } else if (!state.gameOver) {
                 if (state.player1) {
                     let arr = [...state.inning]
                     arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
-                    state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15}
+                    state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15 }
                     localStorage.fargoState = JSON.stringify(state)
                     return state
-                } else  {
+                } else {
                     let arr = [...state.inning]
                     arr[1] === 10 ? arr[1] += 0 : arr[1] += 1
                     state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15, gameOver: state.inning[1] === 10 ? true : false }
@@ -501,6 +512,109 @@ export const matchReducer = (state, action) => {
         case CANCEL:
             state = { ...state, newGameModalOpen: false }
             localStorage.matchState = JSON.stringify(state)
+            return state
+        default:
+            return state
+    }
+}
+
+export const equalOffenseReducer = (state, action) => {
+    switch (action.type) {
+        case INCREMENT:
+            if (state.players === 1 && !state.gameOver) {
+                let scoreArr = [...state.scores1]
+                if (scoreArr[state.inning[0] - 1] !== 20) scoreArr[state.inning[0] - 1] += 1
+                state = { ...state, scores1: scoreArr, ballsRemaining: scoreArr[state.inning[0] - 1] !== 20 ? state.ballsRemaining === 2 ? 15 : state.ballsRemaining - 1 : state.ballsRemaining }
+            } else if (!state.gameOver) {
+                if (state.player1) {
+                    let scoreArr = [...state.scores1]
+                    if (scoreArr[state.inning[0] - 1] !== 20) scoreArr[state.inning[0] - 1] += 1
+                    state = { ...state, scores1: scoreArr, ballsRemaining: scoreArr[state.inning[0] - 1] !== 20 ? state.ballsRemaining === 2 ? 15 : state.ballsRemaining - 1 : state.ballsRemaining }
+                } else {
+                    let scoreArr = [...state.scores2]
+                    if (scoreArr[state.inning[1] - 1] !== 20) scoreArr[state.inning[1] - 1] += 1
+                    state = { ...state, scores1: scoreArr, ballsRemaining: scoreArr[state.inning[1] - 1] !== 20 ? state.ballsRemaining === 2 ? 15 : state.ballsRemaining - 1 : state.ballsRemaining }
+                }
+            }
+            return state
+        case DECREMENT:
+            if (state.players === 1 && !state.gameOver) {
+                let scoreArr = [...state.scores1]
+                if (scoreArr[state.inning[0] - 1] !== 0) scoreArr[state.inning[0] - 1] -= 1
+                state = { ...state, scores1: scoreArr, ballsRemaining: scoreArr[state.inning[0] - 1] !== 20 ? state.ballsRemaining === 15 ? 15 : state.ballsRemaining + 1 : state.ballsRemaining }
+            } else if (!state.gameOver) {
+                if (state.player1) {
+                    let scoreArr = [...state.scores1]
+                    if (scoreArr[state.inning[0] - 1] !== 0) scoreArr[state.inning[0] - 1] -= 1
+                    state = { ...state, scores1: scoreArr, ballsRemaining: scoreArr[state.inning[0] - 1] !== 20 ? state.ballsRemaining === 15 ? 15 : state.ballsRemaining + 1 : state.ballsRemaining }
+                } else {
+                    let scoreArr = [...state.scores2]
+                    if (scoreArr[state.inning[1] - 1] !== 0) scoreArr[state.inning[1] - 1] -= 1
+                    state = { ...state, scores1: scoreArr, ballsRemaining: scoreArr[state.inning[1] - 1] !== 20 ? state.ballsRemaining === 15 ? 15 : state.ballsRemaining + 1 : state.ballsRemaining }
+                }
+            }
+            return state
+        case NEXT:
+            if (state.players === 1 && !state.gameOver) {
+                let arr = [...state.inning]
+                arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
+                state = { ...state, inning: arr, ballsRemaining: 15, gameOver: state.inning[0] === 10 ? true : false }
+            } else if (!state.gameOver) {
+                if (state.player1) {
+                    let arr = [...state.inning]
+                    arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
+                    state = { ...state, inning: arr, ballsRemaining: 15, player1: !state.player1 }
+                } else {
+                    let arr = [...state.inning]
+                    arr[1] === 10 ? arr[1] += 0 : arr[1] += 1
+                    state = { ...state, inning: arr, ballsRemaining: 15, player1: !state.player1, gameOver: state.inning[1] === 10 ? true : false }
+                }
+            }
+            return state
+        case RESET:
+            if (action.payload === 1) {
+                state = {
+                    ...equalOffenseInitialState,
+                    scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    inning: [1, 1],
+                    players: 1,
+                    player1: true,
+                    ballsRemaining: 15,
+                    gameOver: false,
+                    newGameModalOpen: false
+                }
+                return state
+            } else {
+                state = {
+                    ...equalOffenseInitialState,
+                    scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    inning: [1, 1],
+                    players: 2,
+                    player1: true,
+                    ballsRemaining: 15,
+                    gameOver: false,
+                    newGameModalOpen: false
+                }
+                return state
+            }
+        case CHANGE_NAME:
+            if (action.payload.player === 'name1') {
+                state = { ...state, playerName1: action.payload.name }
+                return state
+            } else {
+                state = { ...state, playerName2: action.payload.name }
+                return state
+            }
+        case OPEN_MODAL:
+            state = { ...state, newGameModalOpen: !state.newGameModalOpen }
+            return state
+        case NEW_GAME:
+            state = { ...state, newGameModalOpen: false }
+            return state
+        case CANCEL:
+            state = { ...state, newGameModalOpen: false }
             return state
         default:
             return state

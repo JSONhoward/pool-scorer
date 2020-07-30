@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import HelpModal from './HelpModal/HelpModal'
 
 const HelpStyled = styled.div`
 position: fixed;
@@ -18,11 +19,14 @@ cursor: pointer;
 `
 
 const Help = () => {
+    const [helpOpen, setHelpOpen] = useState(true)
+
     return (
         <>
-        <HelpStyled>
-            <p>?</p>
-        </HelpStyled>
+            <HelpModal open={helpOpen} />
+            <HelpStyled onClick={() => setHelpOpen(!helpOpen)}>
+                <p>?</p>
+            </HelpStyled>
         </>
     )
 }

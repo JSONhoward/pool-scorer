@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import Menu from '../Menu/Menu'
-import Help from '../Help/Help'
 import { AppContext, CLOSE_MENU, OPEN_MENU } from '../../store'
 import anime from 'animejs/lib/anime.es.js'
 
@@ -64,7 +63,6 @@ const Layout = ({ children }) => {
             <Menu right={right} handleMenu={handleMenu} />
                 {children}
         </LayoutStyled>
-        <Help />
         </>
     )
 }

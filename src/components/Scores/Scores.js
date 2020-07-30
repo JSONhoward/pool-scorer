@@ -13,7 +13,7 @@ display: grid;
 place-items: center;
 min-width: 5rem;
 font-size: 5rem;
-color: ${props => props.winner ? 'green' : 'white' };
+color: white;
 opacity: ${props => props.scoreOpacity ? '1' : '.25'};
 border: 2px solid white;
 margin: 0 5px;
@@ -40,11 +40,11 @@ const Scores = ({ players, score1, score2, player1, match, raceTo, gameOver }) =
     return (
         <ScoresBox>
             {
-                players === 1 ? (<CurrentScore winner={score1 === raceTo} scoreOpacity={player1}>{score1}</CurrentScore>) : !match ?
+                players === 1 ? (<CurrentScore scoreOpacity={player1}>{score1}</CurrentScore>) : !match ?
                     (
                         <>
-                            <CurrentScore winner={score1 === raceTo} scoreOpacity={player1}>{score1}</CurrentScore>
-                            <CurrentScore winner={score2 === raceTo} scoreOpacity={!player1}>{score2}</CurrentScore>
+                            <CurrentScore scoreOpacity={player1}>{score1}</CurrentScore>
+                            <CurrentScore scoreOpacity={!player1}>{score2}</CurrentScore>
                         </>
                     )
                     : !gameOver ?
@@ -60,11 +60,11 @@ const Scores = ({ players, score1, score2, player1, match, raceTo, gameOver }) =
                         :
                         (
                             <>
-                                <CurrentScore winner={score1 === raceTo} scoreOpacity={true}>{score1}</CurrentScore>
+                                <CurrentScore scoreOpacity={true}>{score1}</CurrentScore>
                                 <RacksContainer>
                                     <Racks>{raceTo}</Racks>
                                 </RacksContainer>
-                                <CurrentScore winner={score2 === raceTo} scoreOpacity={true}>{score2}</CurrentScore>
+                                <CurrentScore scoreOpacity={true}>{score2}</CurrentScore>
                             </>
                         )
             }

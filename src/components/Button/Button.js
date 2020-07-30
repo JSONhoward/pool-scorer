@@ -5,16 +5,17 @@ const ButtonStyled = styled.button`
 height: 3rem;
 margin: 5px;
 width: ${props => props.width || '12.5rem'};
-font-size: 2rem;
+font-size: ${props => props.font || '2rem'};
 border-radius: 5px;
 box-shadow: 1px 1px 5px black;
 border: none;
 background-color: white;
+cursor: pointer;
 `
 
-const Button = ({text, handler, width}) => {
+const Button = ({text, handler, width, font}) => {
     return (
-        <ButtonStyled onClick={handler} width={width}>
+        <ButtonStyled font={font} onClick={handler} width={width}>
             {text}
         </ButtonStyled>
     )
