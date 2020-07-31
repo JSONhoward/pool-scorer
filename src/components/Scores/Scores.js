@@ -18,6 +18,7 @@ opacity: ${props => props.scoreOpacity ? '1' : '.25'};
 border: 2px solid white;
 margin: 0 5px;
 border-radius: 10px;
+box-shadow: 1px 1px 5px black;
 `
 
 const RacksContainer = styled.div`

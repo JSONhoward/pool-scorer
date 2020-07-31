@@ -6,10 +6,13 @@ const Name = styled.input`
 width: 10rem;
 text-align: center;
 font-size: 2rem;
+font-weight: bold;
+text-transform: uppercase;
+text-shadow: 2px 2px 5px black;
 color: ${props => props.edit ? 'black' : 'white'};
 opacity: ${props => props.turn ? '1' : '.25'};
 border: none;
-background-color: ${props => props.edit ? 'white' : 'rgb(30,30,30)'};
+background-color: ${props => props.edit ? 'white' : 'rgb(0,0,0,0)'};
 `
 
 const NamesStyled = styled.div`

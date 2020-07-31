@@ -5,6 +5,7 @@ const ButtonStyled = styled.button`
 height: 3rem;
 margin: 5px;
 width: ${props => props.width || '12.5rem'};
+font-family: 'Cabin', sans-serif;
 font-size: ${props => props.font || '2rem'};
 border-radius: 5px;
 box-shadow: 1px 1px 5px black;

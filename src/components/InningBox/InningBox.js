@@ -15,6 +15,7 @@ background-color: white;
 border-bottom-right-radius: 10px;
 border: 1px solid black;
 margin: auto 0;
+box-shadow: 1px 1px 5px black;
 `
 
 const InningBoxStyledRight = styled.div`
@@ -27,6 +28,7 @@ background-color: white;
 border-bottom-left-radius: 10px;
 border: 1px solid black;
 margin: auto 0;
+box-shadow: 1px 1px 5px black;
 `
 
 const TabLeft = styled.div`
@@ -40,6 +42,7 @@ color: black;
 background-color: white;
 border-top-right-radius: 10px;
 border-bottom-right-radius: 10px;
+box-shadow: 1px 1px 5px black;
 cursor: pointer;
 
 p {
@@ -60,6 +63,7 @@ color: black;
 background-color: white;
 border-top-left-radius: 10px;
 border-bottom-left-radius: 10px;
+box-shadow: 1px 1px 5px black;
 cursor: pointer;
 
 p {

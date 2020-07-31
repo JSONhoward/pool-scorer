@@ -6,7 +6,7 @@ import { useLocation, Link } from 'react-router-dom'
 import { AppContext } from '../../store'
 
 const MenuStyled = styled.div`
-position: relative;
+position: absolute;
 height: 3rem;
 width: 100vw;
 display: grid;
@@ -14,7 +14,7 @@ place-items: center;
 padding: 10px;
 color: white;
 background-color: rgb(0,0,0,.9);
-border-bottom: 2px solid white;
+box-shadow: 0 1px 5px black;
 z-index: 10;
 `
 
@@ -40,9 +40,8 @@ opacity: ${props => props.opacity};
 height: 10rem;
 width: 10rem;
 background-color: rgb(0,0,0,.9);
-border-bottom: 2px solid white;
-border-left: 2px solid white;
 border-bottom-left-radius: 10px;
+box-shadow: 1px 1px 5px black;
 z-index: 1;
 `
 
@@ -50,6 +49,7 @@ const Ul = styled.ul`
 color: white;
 font-size: 1.5rem;
 list-style-type: none;
+text-align: center;
 
 a, a:visited {
     color: white;
@@ -58,7 +58,7 @@ a, a:visited {
 `
 
 const Li = styled.li`
-
+border-bottom: 1px solid white;
 `
 
 const navMenuItems = [
@@ -93,7 +93,7 @@ const Menu = ({ opacity, handleMenu }) => {
     const navItems = navMenuItems.map((el, i) => {
         return (
             <Link key={i + 1} to={el.link}>
-                <Li key={i + 2}>
+                <Li onClick={() => handleMenu('close')} key={i + 2}>
                     {el.name}
                 </Li>
             </Link>
@@ -103,7 +103,7 @@ const Menu = ({ opacity, handleMenu }) => {
     return (
         <>
             <MenuStyled>
-                <Title>{location.pathname.slice(1) === '' ? 'Pocket Pool' : location.pathname.slice(1)}</Title>
+                <Title>{location.pathname.slice(1) === '' ? 'Pool Scorer' : location.pathname.slice(1)}</Title>
                 <Hamburger>
                     {
                         menuOpen ? <FaTimes onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars onClick={() => handleMenu('open')} size={'2rem'} />

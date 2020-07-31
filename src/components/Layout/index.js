@@ -5,7 +5,7 @@ import { AppContext, CLOSE_MENU, OPEN_MENU } from '../../store'
 import anime from 'animejs/lib/anime.es.js'
 
 const LayoutStyled = styled.div`
-height: calc(100vh - 3rem);
+height: 100vh;
 width: 100vw;
 font-family: 'Cabin', sans-serif;
 `
@@ -59,8 +59,8 @@ const Layout = ({ children }) => {
 
     return (
         <>
+            <Menu opacity={opacity} handleMenu={handleMenu} />
             <LayoutStyled onClick={e => closeMenu(e)}>
-                <Menu opacity={opacity} handleMenu={handleMenu} />
                 {children}
             </LayoutStyled>
         </>

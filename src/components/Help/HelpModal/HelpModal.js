@@ -38,6 +38,7 @@ align-items: center;
 justify-content: center;
 height: 300px;
 width: 300px;
+font-family: 'Cabin', sans-serif;
 color: white;
 background-color: rgb(0,0,0,.9);
 border-radius: 10px;

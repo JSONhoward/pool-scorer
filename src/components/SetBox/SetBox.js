@@ -14,7 +14,7 @@ color: black;
 background-color: white;
 margin: .5rem;
 border-radius: 10px;
-border: 1px solid black;
+box-shadow: 1px 1px 5px black;
 overflow-y: auto;
 `
 
@@ -76,7 +76,7 @@ const SetBox = ({ state }) => {
         return (
             <div key={i + 1}>
                 {
-                    el === null ? '' : el === 1 ? (<FaCheck key={i + 2} color={'green'} />) : (<FaTimes key={i + 3} color={'red'} />)
+                    el === null ? '' : el === 1 ? (<FaCheck key={i + 2} />) : ('')
                 }
             </div>
         )
@@ -86,7 +86,7 @@ const SetBox = ({ state }) => {
         return (
             <div key={i + 1}>
                 {
-                    el === null ? '' : el === 1 ? (<FaCheck key={i + 2} color={'green'} />) : (<FaTimes key={i + 3} color={'red'} />)
+                    el === null ? '' : el === 1 ? (<FaCheck key={i + 2} />) : ('')
                 }
             </div>
         )

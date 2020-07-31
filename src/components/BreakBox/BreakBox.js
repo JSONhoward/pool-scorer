@@ -17,6 +17,7 @@ align-items: flex-end;
 justify-content: center;
 flex: 1;
 transform: rotateX(180deg) rotateY(180deg);
+filter: drop-shadow(1px 1px 5px black);
 
 `
 
@@ -27,6 +28,7 @@ align-items: flex-end;
 justify-content: center;
 flex: 1;
 transform: rotateX(180deg);
+filter: drop-shadow(1px 1px 5px black);
 `
 
 const BreakBox = ({player1, gameOver}) => {

@@ -17,7 +17,7 @@ height: 100%;
 width: 100%;
 color: white;
 text-shadow: 1px 1px 5px black;
-padding-top: 2rem;
+padding-top: 5rem;
 `
 
 const ButtonDiv = styled.div`
