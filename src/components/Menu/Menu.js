@@ -32,10 +32,11 @@ cursor: pointer;
 
 const Nav = styled.nav`
 position: absolute;
-display: ${props => props.right !== -7 ? 'flex' : 'none'};
+display: ${props => props.opacity !== 0 ? 'flex' : 'none'};
 justify-content: center;
 top: 3rem;
-right: ${props => props.right + 'rem'};
+right: 0;
+opacity: ${props => props.opacity};
 height: 10rem;
 width: 10rem;
 background-color: rgb(0,0,0,.9);
@@ -83,7 +84,7 @@ const navMenuItems = [
     }
 ]
 
-const Menu = ({ right, handleMenu }) => {
+const Menu = ({ opacity, handleMenu }) => {
     // eslint-disable-next-line
     const [appState, appDispatch] = useContext(AppContext)
     const { menuOpen } = appState
@@ -109,7 +110,7 @@ const Menu = ({ right, handleMenu }) => {
                     }
                 </Hamburger>
             </MenuStyled>
-            <Nav name={'nav'} open={menuOpen} right={right}>
+            <Nav name={'nav'} open={menuOpen} opacity={opacity}>
                 <Ul name={'nav'}>
                     {navItems}
                 </Ul>

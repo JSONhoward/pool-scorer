@@ -4,8 +4,8 @@ import HelpModal from './HelpModal/HelpModal'
 
 const HelpStyled = styled.div`
 position: fixed;
-bottom: 1rem;
-right: 1rem;
+bottom: .5rem;
+left: .5rem;
 display: grid;
 place-items: center;
 height: 3rem;
@@ -18,13 +18,15 @@ box-shadow: 1px 1px 5px black;
 cursor: pointer;
 `
 
-const Help = () => {
-    const [helpOpen, setHelpOpen] = useState(true)
+const Help = ({page}) => {
+    const [helpOpen, setHelpOpen] = useState(false)
+
+    const handleModal = () => setHelpOpen(!helpOpen)
 
     return (
         <>
-            <HelpModal open={helpOpen} />
-            <HelpStyled onClick={() => setHelpOpen(!helpOpen)}>
+            <HelpModal handler={handleModal} page={page} open={helpOpen} />
+            <HelpStyled onClick={handleModal}>
                 <p>?</p>
             </HelpStyled>
         </>

@@ -7,6 +7,7 @@ import Scores from '../../components/Scores/Scores'
 import Stats from '../../components/Stats/Stats'
 import InningBox from '../../components/InningBox/InningBox'
 import Button from '../../components/Button/Button'
+import Help from '../../components/Help/Help'
 
 const FargoStyled = styled.div`
 display: flex;
@@ -56,6 +57,7 @@ const Fargo = () => {
                 </ButtonDiv>
                 <InningBox players={players} scores={[scores1, scores2]}/>
             </FargoStyled>
+            <Help page={'fargo'} />
         </>
     )
 }

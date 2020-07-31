@@ -446,7 +446,7 @@ export const matchReducer = (state, action) => {
                 scores1: [null],
                 scores2: [null],
                 rackNumber: 1,
-                player1: true,
+                player1: action.payload.breakChoice === 1,
                 players: 2,
                 gameOver: false,
                 newGameModalOpen: false,

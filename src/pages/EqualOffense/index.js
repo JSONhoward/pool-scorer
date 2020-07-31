@@ -7,6 +7,7 @@ import Stats from '../../components/Stats/Stats'
 import Button from '../../components/Button/Button'
 import InningBox from '../../components/InningBox/InningBox'
 import Modal from '../../components/Modal/Modal'
+import Help from '../../components/Help/Help'
 
 const EqualOffenseStyled = styled.div`
 display: flex;
@@ -54,6 +55,7 @@ const EqualOffense = () => {
                 </ButtonDiv>
                 <InningBox players={players} scores={[scores1, scores2]} />
             </EqualOffenseStyled>
+            <Help page={'eo'} />
         </>
     )
 }

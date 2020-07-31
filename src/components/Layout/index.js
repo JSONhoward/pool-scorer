@@ -11,7 +11,7 @@ font-family: 'Cabin', sans-serif;
 `
 
 const Layout = ({ children }) => {
-    const [right, setRight] = useState(-7)
+    const [opacity, setOpacity] = useState(0)
     const [appState, appDispatch] = useContext(AppContext)
     const { menuOpen, } = appState
 
@@ -20,17 +20,17 @@ const Layout = ({ children }) => {
             appDispatch({ type: CLOSE_MENU })
 
             let obj = {
-                val: 0
+                val: 1
             }
 
             anime({
                 targets: obj,
-                val: -7,
+                val: 0,
                 autoplay: false,
                 loop: false,
                 easing: 'linear',
                 duration: 250,
-                update: () => setRight(obj.val)
+                update: () => setOpacity(obj.val)
             }).play()
         }
     }
@@ -43,26 +43,26 @@ const Layout = ({ children }) => {
         }
 
         let obj = {
-            val: menuOpen ? 0 : -7
+            val: menuOpen ? 1 : 0
         }
 
         anime({
             targets: obj,
-            val: menuOpen ? -7 : 0,
+            val: menuOpen ? 0 : 1,
             autoplay: false,
             loop: false,
             easing: 'linear',
             duration: 250,
-            update: () => setRight(obj.val)
+            update: () => setOpacity(obj.val)
         }).play()
     }
 
     return (
         <>
-        <LayoutStyled onClick={e => closeMenu(e)}>
-            <Menu right={right} handleMenu={handleMenu} />
+            <LayoutStyled onClick={e => closeMenu(e)}>
+                <Menu opacity={opacity} handleMenu={handleMenu} />
                 {children}
-        </LayoutStyled>
+            </LayoutStyled>
         </>
     )
 }

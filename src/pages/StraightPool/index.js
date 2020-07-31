@@ -8,6 +8,7 @@ import Names from '../../components/Names/Names'
 import Scores from '../../components/Scores/Scores'
 import Stats from '../../components/Stats/Stats'
 import Button from '../../components/Button/Button'
+import Help from '../../components/Help/Help'
 
 const StraightPoolStyled = styled.div`
 display: flex;
@@ -71,6 +72,7 @@ const StraightPool = () => {
                     <Button handler={(e) => handleButton(e,OPEN_MODAL)} text={'New Game'} />
                 </ButtonDiv>
             </StraightPoolStyled>
+            <Help page={'14.1'} />
         </>
     )
 }
