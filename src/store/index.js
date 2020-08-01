@@ -21,15 +21,18 @@ const types = {
     NEXT: 'next',
     CHANGE_NAME: 'change name',
     CLOSE_MENU: 'close menu',
+    CLOSE_MAIL: 'close mail',
+    OPEN_MAIL: 'open mail',
     WIN: 'win',
     LOSS: 'loss'
 }
 
-export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, WIN, LOSS } = types
+export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, CLOSE_MAIL, OPEN_MAIL, WIN, LOSS } = types
 
 //? Initial State
 export const appInitialState = {
-    menuOpen: false
+    menuOpen: false,
+    mailOpen: false
 }
 
 export const straightPoolInitialState = localStorage.straightPoolState ? JSON.parse(localStorage.straightPoolState) : {
@@ -107,6 +110,12 @@ export const appReducer = (state, action) => {
             return state
         case CLOSE_MENU:
             state = { ...state, menuOpen: false }
+            return state
+        case OPEN_MAIL:
+            state = {...state, mailOpen: true}
+            return state
+        case CLOSE_MAIL:
+            state = {...state, mailOpen: false}
             return state
         default:
             return state

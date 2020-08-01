@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { createRef, useContext } from 'react'
 import styled from 'styled-components'
 import { FaEnvelope } from 'react-icons/fa'
 import ContactModal from '../Modal/ContactModal'
+import { AppContext, OPEN_MAIL } from '../../store'
 
 const FooterStyled = styled.footer`
 position: absolute;
@@ -25,21 +26,31 @@ p {
 }
 `
 
-const Footer = () => {
-    const [mailOpen, setMailOpen] = useState(false)
 
-    const handleMailModal = () => setMailOpen(!mailOpen)
+
+const Footer = () => {
+    const [appState, appDispatch] = useContext(AppContext)
+    const { mailOpen } = appState
+    const closeRef = createRef()
+
+    const handleMailModal = type => appDispatch({ type: type })
+
+    const handleKeys = e => {
+        if (e.keyCode === 13) {
+            appDispatch({ type: OPEN_MAIL })
+        }
+    }
 
     return (
         <>
-        <ContactModal open={mailOpen} handle={handleMailModal} />
-        <FooterStyled>
-            <FooterSection flex={1.5}><p>&copy; 2020 Pool Scorer</p></FooterSection>
-            <FooterSection>
-            <FaEnvelope style={{cursor: 'pointer'}} onClick={handleMailModal} size={'1.5rem'} />
-            <p style={{cursor: 'pointer'}} onClick={handleMailModal}>Contact </p>
-            </FooterSection>
-        </FooterStyled>
+            <ContactModal reference={closeRef} open={mailOpen} handle={handleMailModal} />
+            <FooterStyled>
+                <FooterSection flex={1.5}><p>&copy; 2020 Pool Scorer</p></FooterSection>
+                <FooterSection>
+                    <FaEnvelope onKeyUp={e => handleKeys(e)} tabIndex='0' style={{ cursor: 'pointer' }} onClick={() => handleMailModal(OPEN_MAIL)} size={'1.5rem'} />
+                    <p style={{ cursor: 'pointer' }} onClick={() => handleMailModal(OPEN_MAIL)}>Contact </p>
+                </FooterSection>
+            </FooterStyled>
         </>
     )
 }

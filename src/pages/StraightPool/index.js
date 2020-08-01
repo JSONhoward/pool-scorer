@@ -68,11 +68,11 @@ const StraightPool = () => {
                         )
                 }
                 <ButtonDiv>
-                    <Button width={'3rem'} handler={(e) => handleButton(e, DECREMENT)} text={'-'} />
-                    <Button width={'3rem'} handler={(e) => handleButton(e, INCREMENT)} text={'+'} />
-                    <Button handler={(e) => handleButton(e, NEXT)} text={players === 1 ? 'Missed' : 'Next Player'} />
-                    <Button handler={(e) => handleButton(e, FOUL)} text={'Foul'} />
-                    <Button handler={(e) => handleButton(e,OPEN_MODAL)} text={'New Game'} />
+                    <Button tabIndex='0' width={'3rem'} handler={(e) => handleButton(e, DECREMENT)} text={'-'} />
+                    <Button tabIndex='0' width={'3rem'} handler={(e) => handleButton(e, INCREMENT)} text={'+'} />
+                    <Button tabIndex='0' handler={(e) => handleButton(e, NEXT)} text={players === 1 ? 'Missed' : 'Next Player'} />
+                    <Button tabIndex='0' handler={(e) => handleButton(e, FOUL)} text={'Foul'} />
+                    <Button tabIndex='0' handler={(e) => handleButton(e,OPEN_MODAL)} text={'New Game'} />
                 </ButtonDiv>
             </StraightPoolStyled>
             <Help page={'14.1'} />

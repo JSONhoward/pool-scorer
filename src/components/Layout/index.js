@@ -58,9 +58,29 @@ const Layout = ({ children }) => {
         }).play()
     }
 
+    const handleKeys = e => {
+        if(menuOpen && e.keyCode === 27) {
+            appDispatch({ type: CLOSE_MENU })
+
+            let obj = {
+                val: 1
+            }
+
+            anime({
+                targets: obj,
+                val: 0,
+                autoplay: false,
+                loop: false,
+                easing: 'linear',
+                duration: 250,
+                update: () => setOpacity(obj.val)
+            }).play()
+        }
+    }
+
     return (
         <>
-            <LayoutStyled onClick={e => closeMenu(e)}>
+            <LayoutStyled onClick={e => closeMenu(e)} onKeyUp={(e) => handleKeys(e)}>
                 <Menu opacity={opacity} handleMenu={handleMenu} />
                 {children}
                 <Footer />

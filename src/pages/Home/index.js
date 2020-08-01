@@ -3,8 +3,6 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 
-import Button from '../../components/Button/Button'
-
 const HomeStyled = styled.div`
 display: flex;
 height: 100%;
@@ -21,6 +19,25 @@ width: 20rem;
 padding: 0px;
 flex-wrap: wrap;
 
+a {
+    text-decoration: none;
+}
+`
+
+const GameButton = styled.div`
+display: grid;
+place-items: center;
+height: ${props => props.height || '1.5rem'};
+margin: 5px;
+width: ${props => props.width || '6.25rem'};
+font-family: 'Cabin', sans-serif;
+font-size: ${props => props.font || '1rem'};
+border-radius: 5px;
+box-shadow: 1px 1px 5px black;
+border: none;
+background-color: white;
+cursor: pointer;
+color: black;
 `
 
 const Home = () => {
@@ -30,11 +47,11 @@ const Home = () => {
         <title>Pool Scorer | Home</title>
         </Helmet>
             <ButtonDiv>
-                <Link to={'/14.1'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'14.1'} /></Link>
-                <Link to={'/fargo'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Fargo'} /></Link>
-                <Link to={'/hopkins-q-skills'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Hopkins Q Skills'} /></Link>
-                <Link to={'/equal-offense'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Equal Offense'} /></Link>
-                <Link to={'/vs'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'VS.'} /></Link>
+                <Link to={'/14.1'}><GameButton font={'2rem'} height={'4rem'} width={'15rem'}>14.1</GameButton></Link>
+                <Link to={'/fargo'}><GameButton font={'2rem'} height={'4rem'} width={'15rem'}>Fargo</GameButton></Link>
+                <Link to={'/hopkins-q-skills'}><GameButton font={'2rem'} height={'4rem'} width={'15rem'}>Hopkins Q Skills</GameButton></Link>
+                <Link to={'/equal-offense'}><GameButton font={'2rem'} height={'4rem'} width={'15rem'}>Equal Offense</GameButton></Link>
+                <Link to={'/vs'}><GameButton font={'2rem'} height={'4rem'} width={'15rem'}>VS.</GameButton></Link>
             </ButtonDiv>
         </HomeStyled>
     )

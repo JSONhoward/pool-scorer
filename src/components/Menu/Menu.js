@@ -27,6 +27,9 @@ text-transform: uppercase;
 const Hamburger = styled.div`
 position: absolute;
 right: 20px;
+border: none;
+
+background-color: rgb(0,0,0,.9);
 cursor: pointer;
 `
 
@@ -94,10 +97,15 @@ const Menu = ({ opacity, handleMenu }) => {
     const { menuOpen } = appState
     const location = useLocation()
 
+    const handleKeys = e => {
+        if(e.keyCode === 13 && !menuOpen) handleMenu('open') 
+        if(e.keyCode === 13 && menuOpen) handleMenu('close') 
+    }
+
     const navItems = navMenuItems.map((el, i) => {
         return (
             <Link key={i + 1} to={el.link}>
-                <Li onClick={() => handleMenu('close')} key={i + 2}>
+                <Li onKeyUp={e => menuOpen && e.keyCode === 13 && handleMenu('close')} onClick={() => handleMenu('close')} key={i + 2}>
                     {el.name}
                 </Li>
             </Link>
@@ -108,13 +116,13 @@ const Menu = ({ opacity, handleMenu }) => {
         <>
             <MenuStyled>
                 <Title>{location.pathname.slice(1) === '' ? 'Pool Scorer' : location.pathname.slice(1)}</Title>
-                <Hamburger>
+                <Hamburger role='button'>
                     {
-                        menuOpen ? <FaTimes onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars onClick={() => handleMenu('open')} size={'2rem'} />
+                        menuOpen ? <FaTimes tabIndex='0' color={'white'} onKeyUp={(e) => handleKeys(e)} onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars tabIndex='0' color={'white'} onKeyUp={(e) => handleKeys(e)} onClick={() => handleMenu('open')} size={'2rem'} />
                     }
                 </Hamburger>
             </MenuStyled>
-            <Nav name={'nav'} open={menuOpen} opacity={opacity}>
+            <Nav name={'nav'} open={menuOpen} opacity={opacity} aria-hidden={!menuOpen}>
                 <Ul name={'nav'}>
                     {navItems}
                 </Ul>

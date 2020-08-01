@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
-import styled, {keyframes} from 'styled-components'
+import React, { useState, useEffect } from 'react'
+import styled, { keyframes } from 'styled-components'
 import { FaTimes, FaCircleNotch } from 'react-icons/fa'
+import { CLOSE_MAIL } from '../../store'
 
 const spinAnimation = keyframes`
 from {
@@ -75,13 +76,17 @@ const Spinner = styled.div`
 animation: ${spinAnimation} 2s linear infinite;
 `
 
-const ContactModal = ({ open, handle }) => {
+const ContactModal = ({ open, handle, reference }) => {
     const [email, setEmail] = useState({ from: '', subject: '', message: '' })
     const [sent, setSent] = useState(false)
     const [error, setError] = useState(false)
     const [loading, setLoading] = useState(false)
 
-    const {from, subject, message} = email
+    useEffect(() => {
+        reference.current.focus()
+    },[reference])
+
+    const { from, subject, message } = email
 
     const sendMessage = () => {
         setSent(true)
@@ -112,22 +117,22 @@ const ContactModal = ({ open, handle }) => {
     const validateEmail = email => {
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
-      }
+    }
 
-      const closeModal = () => {
-          handle()
-          setSent(false)
-      }
+    const closeModal = type => {
+        handle(type)
+        setSent(false)
+    }
 
     return (
         <ContactStyled open={open}>
-            <Close onClick={closeModal}><FaTimes color={'white'} size={'1.5rem'} /></Close>
+            <Close onKeyUp={e => e.keyCode === 13 && closeModal(CLOSE_MAIL)} ref={reference} tabIndex='0' onClick={() => closeModal(CLOSE_MAIL)}><FaTimes color={'white'} size={'1.5rem'} /></Close>
             {
                 sent ? (
                     <>
-                    {
-                        loading ? <Spinner><FaCircleNotch size={'3rem'} color={'white'}/></Spinner> : error ? (<p>Oops something went wrong :/</p>) : (<p>Message Sent!</p>)
-                    }
+                        {
+                            loading ? <Spinner><FaCircleNotch size={'3rem'} color={'white'} /></Spinner> : error ? (<p>Oops something went wrong :/</p>) : (<p>Message Sent!</p>)
+                        }
                     </>
                 )
                     :
@@ -136,9 +141,9 @@ const ContactModal = ({ open, handle }) => {
                             <ContactDiv>
                                 <p><b>To: </b><em>jason@poolscorer.com</em></p>
                             </ContactDiv>
-                            <ContactDiv>
+                            <ContactDiv >
                                 <p><b>From: </b></p>
-                                <ContactInput minLength={5} name={'from'} onChange={handleMessage} placeholder='your email' type="text" border={from.length > 0 && !validateEmail(from)} required></ContactInput>
+                                <ContactInput autoFocus minLength={5} name={'from'} onChange={handleMessage} placeholder='your email' type="text" border={from.length > 0 && !validateEmail(from)} required></ContactInput>
                             </ContactDiv>
                             <ContactDiv>
                                 <p><b>Subject: </b></p>
