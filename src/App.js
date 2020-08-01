@@ -8,6 +8,7 @@ import Fargo from './pages/Fargo'
 import StraightPool from './pages/StraightPool'
 import Match from './pages/Match'
 import EqualOffense from './pages/EqualOffense'
+import NotFound from './pages/NotFound'
 
 const App = () => {
   const [appState, appDispatch] = useReducer(appReducer, appInitialState)
@@ -30,6 +31,7 @@ const App = () => {
                   <Route path='/14.1' component={StraightPool} />
                   <Route path='/vs' component={Match} />
                   <Route path='/equal-offense' component={EqualOffense} />
+                  <Route path='*' component={NotFound} />
                 </Layout>
               </Switch>
             </Router>

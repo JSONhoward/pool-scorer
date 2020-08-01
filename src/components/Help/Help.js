@@ -4,7 +4,7 @@ import HelpModal from './HelpModal/HelpModal'
 
 const HelpStyled = styled.div`
 position: fixed;
-bottom: .5rem;
+bottom: 3.5rem;
 left: .5rem;
 display: grid;
 place-items: center;

@@ -20,12 +20,11 @@ const types = {
     NEXT: 'next',
     CHANGE_NAME: 'change name',
     CLOSE_MENU: 'close menu',
-    ROTATE: 'rotate',
     WIN: 'win',
     LOSS: 'loss'
 }
 
-export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, ROTATE, WIN, LOSS } = types
+export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, WIN, LOSS } = types
 
 //? Initial State
 export const appInitialState = {
@@ -269,36 +268,18 @@ export const fargoReducer = (state, action) => {
     switch (action.type) {
         case INCREMENT:
             if (state.players === 1 && !state.gameOver) {
-                if (state.inOrder[0]) {
-                    let arr = [...state.scores1]
-                    if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 2
-                    state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
-                } else {
+                let arr = [...state.scores1]
+                if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
+                state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+            } else if (!state.gameOver) {
+                if (state.player1) {
                     let arr = [...state.scores1]
                     if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
                     state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
-                }
-            } else if (!state.gameOver) {
-                if (state.player1) {
-                    if (state.inOrder[0]) {
-                        let arr = [...state.scores1]
-                        if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 2
-                        state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
-                    } else {
-                        let arr = [...state.scores1]
-                        if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
-                        state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
-                    }
                 } else {
-                    if (state.inOrder[1]) {
-                        let arr = [...state.scores2]
-                        if (state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 2
-                        state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
-                    } else {
-                        let arr = [...state.scores2]
-                        if (state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 1
-                        state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
-                    }
+                    let arr = [...state.scores2]
+                    if (state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 1
+                    state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
                 }
             }
             localStorage.fargoState = JSON.stringify(state)
@@ -312,14 +293,6 @@ export const fargoReducer = (state, action) => {
                 let arr = [...state.scores2]
                 arr[state.inning[1] - 1] !== 0 ? arr[state.inning[1] - 1] -= 1 : arr[state.inning[1] - 1] = 0
                 state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15 }
-            }
-            localStorage.fargoState = JSON.stringify(state)
-            return state
-        case ROTATE:
-            if (!state.gameOver) {
-                let arr = [...state.inOrder]
-                arr[state.player1 ? 0 : 1] = true
-                state = { ...state, inOrder: arr }
             }
             localStorage.fargoState = JSON.stringify(state)
             return state
@@ -350,7 +323,6 @@ export const fargoReducer = (state, action) => {
                     inning: [1, 1],
                     players: 1,
                     player1: true,
-                    inOrder: [false, false],
                     ballsRemaining: 15,
                     gameOver: false,
                     newGameModalOpen: false
@@ -363,7 +335,6 @@ export const fargoReducer = (state, action) => {
                     inning: [1, 1],
                     players: 2,
                     player1: true,
-                    inOrder: [false, false],
                     ballsRemaining: 15,
                     gameOver: false,
                     newGameModalOpen: false

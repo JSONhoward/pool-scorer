@@ -7,7 +7,7 @@ const animDuration = 500
 
 const InningBoxStyledLeft = styled.div`
 position: fixed;
-top: 3.5rem;
+top: ${props => props.top || '8.5rem'};
 left: ${props => props.px + 'px'};
 height: 250px;
 width: 100px;
@@ -20,7 +20,7 @@ box-shadow: 1px 1px 5px black;
 
 const InningBoxStyledRight = styled.div`
 position: fixed;
-top: 3.5rem;
+top: ${props => props.top || '8.5rem'};
 right: ${props => props.px + 'px'};
 height: 250px;
 width: 100px;
@@ -94,7 +94,7 @@ th, tr, td {
 }
 `
 
-const InningBox = ({ players, scores }) => {
+const InningBox = ({ players, scores,top }) => {
     const [isOpenLeft, setIsOpenLeft] = useState(false)
     const [isOpenRight, setIsOpenRight] = useState(false)
     const [pixelsLeft, setPixelsLeft] = useState(-100)
@@ -192,7 +192,7 @@ const InningBox = ({ players, scores }) => {
         <>
             {
                 players === 1 ? (
-                    <InningBoxStyledLeft px={pixelsLeft} ref={inningsTab}>
+                    <InningBoxStyledLeft top={top} px={pixelsLeft} ref={inningsTab}>
                         <TabLeft onClick={isOpenLeft ? closeLeft : openLeft}>
                             <p>Innings</p>
                             {
@@ -213,7 +213,7 @@ const InningBox = ({ players, scores }) => {
                     :
                     (
                         <>
-                            <InningBoxStyledLeft px={pixelsLeft} ref={inningsTab}>
+                            <InningBoxStyledLeft top={top} px={pixelsLeft} ref={inningsTab}>
                                 <TabLeft onClick={isOpenLeft ? closeLeft : openLeft}>
                                     <p>Innings</p>
                                     {
@@ -230,7 +230,7 @@ const InningBox = ({ players, scores }) => {
                                     </tbody>
                                 </Table>
                             </InningBoxStyledLeft>
-                            <InningBoxStyledRight px={pixelsRight} ref={inningsTab}>
+                            <InningBoxStyledRight top={top} px={pixelsRight} ref={inningsTab}>
                                 <TabRight onClick={isOpenRight ? closeRight : openRight}>
                                     <p>Innings</p>
                                     {

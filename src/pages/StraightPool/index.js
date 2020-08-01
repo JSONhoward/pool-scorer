@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import {Helmet} from 'react-helmet'
 
-import { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, NEXT } from '../../store'
-import { StraightPoolContext } from '../../store'
+import { StraightPoolContext,INCREMENT, DECREMENT, FOUL, OPEN_MODAL, NEXT } from '../../store'
 import Modal from '../../components/Modal/Modal'
 import Names from '../../components/Names/Names'
 import Scores from '../../components/Scores/Scores'
@@ -26,7 +26,7 @@ const ButtonDiv = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-width: 15rem;
+width: 10rem;
 padding: 0px;
 flex-wrap: wrap;
 `
@@ -44,6 +44,9 @@ const StraightPool = () => {
         <>
             <Modal open={newGameModalOpen} dispatch={straightPoolDispatch} />
             <StraightPoolStyled>
+            <Helmet>
+            <title>Pool Scorer | 14.1</title>
+            </Helmet>
                 <Names state={straightPoolState} dispatch={straightPoolDispatch} />
                 <Scores score1={score1} score2={score2} players={players} player1={player1} />
                 <Stats stat={ballsRemaining} statLabel={'Balls Remaining'} />
@@ -65,8 +68,8 @@ const StraightPool = () => {
                         )
                 }
                 <ButtonDiv>
-                    <Button width={'6rem'} handler={(e) => handleButton(e, DECREMENT)} text={'-'} />
-                    <Button width={'6rem'} handler={(e) => handleButton(e, INCREMENT)} text={'+'} />
+                    <Button width={'3rem'} handler={(e) => handleButton(e, DECREMENT)} text={'-'} />
+                    <Button width={'3rem'} handler={(e) => handleButton(e, INCREMENT)} text={'+'} />
                     <Button handler={(e) => handleButton(e, NEXT)} text={players === 1 ? 'Missed' : 'Next Player'} />
                     <Button handler={(e) => handleButton(e, FOUL)} text={'Foul'} />
                     <Button handler={(e) => handleButton(e,OPEN_MODAL)} text={'New Game'} />

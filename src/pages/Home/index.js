@@ -15,7 +15,7 @@ const ButtonDiv = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
-width: 15rem;
+width: 20rem;
 padding: 0px;
 flex-wrap: wrap;
 
@@ -25,10 +25,10 @@ const Home = () => {
     return (
         <HomeStyled>
             <ButtonDiv>
-                <Link to={'14.1'}><Button handler={null} text={'14.1'} /></Link>
-                <Link to={'fargo'}><Button handler={null} text={'Fargo'} /></Link>
-                <Link to={'equal-offense'}><Button handler={null} font={'1.5rem'} text={'Equal Offense'} /></Link>
-                <Link to={'match'}><Button handler={null} text={'VS.'} /></Link>
+                <Link to={'14.1'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'14.1'} /></Link>
+                <Link to={'fargo'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Fargo'} /></Link>
+                <Link to={'equal-offense'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Equal Offense'} /></Link>
+                <Link to={'vs'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'VS.'} /></Link>
             </ButtonDiv>
         </HomeStyled>
     )

@@ -1,18 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FaCheck, FaTimes } from 'react-icons/fa'
+import { FaCheck } from 'react-icons/fa'
 
 const SetBoxStyled = styled.div`
 position: relative;
 display: flex;
 justify-content: space-evenly;
 height: fit-content;
-max-height: 200px;
+min-height: 125px;
 width: 200px;
 font-size: 2rem;
 color: black;
 background-color: white;
 margin: .5rem;
+margin-bottom: 3.5rem;
 border-radius: 10px;
 box-shadow: 1px 1px 5px black;
 overflow-y: auto;

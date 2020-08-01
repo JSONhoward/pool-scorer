@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Menu from '../Menu/Menu'
 import { AppContext, CLOSE_MENU, OPEN_MENU } from '../../store'
 import anime from 'animejs/lib/anime.es.js'
+import Footer from '../Footer/Footer'
 
 const LayoutStyled = styled.div`
 height: 100vh;
@@ -59,9 +60,10 @@ const Layout = ({ children }) => {
 
     return (
         <>
-            <Menu opacity={opacity} handleMenu={handleMenu} />
             <LayoutStyled onClick={e => closeMenu(e)}>
+                <Menu opacity={opacity} handleMenu={handleMenu} />
                 {children}
+                <Footer />
             </LayoutStyled>
         </>
     )
