@@ -1,8 +1,8 @@
-import React, { useContext } from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
 import {Helmet} from 'react-helmet'
 
-import { FargoContext, INCREMENT, DECREMENT, OPEN_MODAL, NEXT } from '../../store'
+import {HopkinsContext, INCREMENT, DECREMENT, OPEN_MODAL, NEXT} from '../../store'
 import Modal from '../../components/Modal/Modal'
 import Names from '../../components/Names/Names'
 import Scores from '../../components/Scores/Scores'
@@ -11,7 +11,7 @@ import InningBox from '../../components/InningBox/InningBox'
 import Button from '../../components/Button/Button'
 import Help from '../../components/Help/Help'
 
-const FargoStyled = styled.div`
+const HopkinsQStyled = styled.div`
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -33,23 +33,23 @@ padding: 0px;
 flex-wrap: wrap;
 `
 
-const Fargo = () => {
-    const [fargoState, fargoDispatch] = useContext(FargoContext)
-    const { inning, player1, players, scores1, scores2, newGameModalOpen } = fargoState
+const HopkinsQ = () => {
+    const [hopkinsState, hopkinsDispatch] = useContext(HopkinsContext)
+    const { inning, player1, players, scores1, scores2, newGameModalOpen } = hopkinsState
 
     const handleButton = (e, type) => {
         e.preventDefault()
-        fargoDispatch({ type })
+        hopkinsDispatch({ type })
     }
 
     return (
         <>
-            <Modal open={newGameModalOpen} dispatch={fargoDispatch} />
-            <FargoStyled>
+            <Modal open={newGameModalOpen} dispatch={hopkinsDispatch} />
+            <HopkinsQStyled>
             <Helmet>
-            <title>Pool Scorer | Fargo</title>
+            <title>Pool Scorer | Hopkins Q Skills</title>
             </Helmet>
-                <Names state={fargoState} dispatch={fargoDispatch} />
+                <Names state={hopkinsState} dispatch={hopkinsDispatch} />
                 <Scores score1={scores1?.reduce((a, b) => a + b)} score2={scores2?.reduce((a, b) => a + b)} players={players} player1={player1} />
                 <Stats stat={inning[player1 ? 0 : 1] === 11 ? 10 : inning[player1 ? 0 : 1]} statLabel={"Inning"} />
                 <Stats stat={player1 ? scores1[inning[0] - 1] : scores2[inning[1] - 1]} statLabel={"Inning Score"} />
@@ -60,10 +60,10 @@ const Fargo = () => {
                     <Button handler={(e) => handleButton(e, OPEN_MODAL)} text={'New Game'} />
                 </ButtonDiv>
                 <InningBox top={'3.5rem'} players={players} scores={[scores1, scores2]}/>
-            </FargoStyled>
-            <Help page={'fargo'} />
+            </HopkinsQStyled>
+            <Help page={'hopkins'} />
         </>
     )
 }
 
-export default Fargo
+export default HopkinsQ

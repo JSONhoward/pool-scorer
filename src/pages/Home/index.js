@@ -30,10 +30,11 @@ const Home = () => {
         <title>Pool Scorer | Home</title>
         </Helmet>
             <ButtonDiv>
-                <Link to={'14.1'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'14.1'} /></Link>
-                <Link to={'fargo'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Fargo'} /></Link>
-                <Link to={'equal-offense'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Equal Offense'} /></Link>
-                <Link to={'vs'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'VS.'} /></Link>
+                <Link to={'/14.1'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'14.1'} /></Link>
+                <Link to={'/fargo'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Fargo'} /></Link>
+                <Link to={'/hopkins-q-skills'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Hopkins Q Skills'} /></Link>
+                <Link to={'/equal-offense'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Equal Offense'} /></Link>
+                <Link to={'/vs'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'VS.'} /></Link>
             </ButtonDiv>
         </HomeStyled>
     )

@@ -37,8 +37,8 @@ justify-content: center;
 top: 3rem;
 right: 0;
 opacity: ${props => props.opacity};
-height: 10rem;
-width: 10rem;
+height: 12rem;
+width: 11rem;
 background-color: rgb(0,0,0,.9);
 border-bottom-left-radius: 10px;
 box-shadow: 1px 1px 5px black;
@@ -73,6 +73,10 @@ const navMenuItems = [
     {
         name: 'Fargo',
         link: '/fargo'
+    },
+    {
+        name: 'Hopkins Q Skills',
+        link: '/hopkins-q-skills'
     },
     {
         name: 'Equal Offense',

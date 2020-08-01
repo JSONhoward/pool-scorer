@@ -6,6 +6,7 @@ export const StraightPoolContext = createContext()
 export const FargoContext = createContext()
 export const MatchContext = createContext()
 export const EqualOffenseContext = createContext()
+export const HopkinsContext = createContext()
 
 //? Types
 const types = {
@@ -55,8 +56,18 @@ export const fargoInitialState = localStorage.fargoState ? JSON.parse(localStora
     inning: [1, 1],
     players: 1,
     player1: true,
-    inOrder: [false, false],
-    ballsRemaining: 15,
+    gameOver: false,
+    newGameModalOpen: false
+}
+
+export const hopkinsInitialState = localStorage.hopkinsState ? JSON.parse(localStorage.hopkinsState) : {
+    playerName1: '',
+    playerName2: '',
+    scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    inning: [1, 1],
+    players: 1,
+    player1: true,
     gameOver: false,
     newGameModalOpen: false
 }
@@ -269,17 +280,17 @@ export const fargoReducer = (state, action) => {
         case INCREMENT:
             if (state.players === 1 && !state.gameOver) {
                 let arr = [...state.scores1]
-                if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
-                state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                if (arr[state.inning[0] - 1] !== 30) arr[state.inning[0] - 1] += 1
+                state = { ...state, scores1: arr}
             } else if (!state.gameOver) {
                 if (state.player1) {
                     let arr = [...state.scores1]
-                    if (state.ballsRemaining !== 0) arr[state.inning[0] - 1] += 1
-                    state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                    if (arr[state.inning[0] - 1] !== 30) arr[state.inning[0] - 1] += 1
+                    state = { ...state, scores1: arr}
                 } else {
                     let arr = [...state.scores2]
-                    if (state.ballsRemaining !== 0) arr[state.inning[1] - 1] += 1
-                    state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 0 ? state.ballsRemaining - 1 : 0 }
+                    if (arr[state.inning[1] - 1] !== 30) arr[state.inning[1] - 1] += 1
+                    state = { ...state, scores2: arr}
                 }
             }
             localStorage.fargoState = JSON.stringify(state)
@@ -288,11 +299,11 @@ export const fargoReducer = (state, action) => {
             if (state.player1 && !state.gameOver) {
                 let arr = [...state.scores1]
                 arr[state.inning[0] - 1] !== 0 ? arr[state.inning[0] - 1] -= 1 : arr[state.inning[0] - 1] = 0
-                state = { ...state, scores1: arr, ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15 }
+                state = { ...state, scores1: arr}
             } else if (!state.gameOver) {
                 let arr = [...state.scores2]
                 arr[state.inning[1] - 1] !== 0 ? arr[state.inning[1] - 1] -= 1 : arr[state.inning[1] - 1] = 0
-                state = { ...state, scores2: arr, ballsRemaining: state.ballsRemaining !== 15 ? state.ballsRemaining + 1 : 15 }
+                state = { ...state, scores2: arr}
             }
             localStorage.fargoState = JSON.stringify(state)
             return state
@@ -300,16 +311,16 @@ export const fargoReducer = (state, action) => {
             if (state.players === 1 && !state.gameOver) {
                 let arr = [...state.inning]
                 arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
-                state = { ...state, inOrder: [false, false], inning: arr, ballsRemaining: 15, gameOver: state.inning[0] === 10 ? true : false }
+                state = { ...state, inning: arr, gameOver: state.inning[0] === 10 ? true : false }
             } else if (!state.gameOver) {
                 if (state.player1) {
                     let arr = [...state.inning]
                     arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
-                    state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15 }
+                    state = { ...state, player1: !state.player1, inning: arr}
                 } else {
                     let arr = [...state.inning]
                     arr[1] === 10 ? arr[1] += 0 : arr[1] += 1
-                    state = { ...state, inOrder: [false, false], player1: !state.player1, inning: arr, ballsRemaining: 15, gameOver: state.inning[1] === 10 ? true : false }
+                    state = { ...state, player1: !state.player1, inning: arr, gameOver: state.inning[1] === 10 ? true : false }
                 }
             }
             localStorage.fargoState = JSON.stringify(state)
@@ -323,7 +334,6 @@ export const fargoReducer = (state, action) => {
                     inning: [1, 1],
                     players: 1,
                     player1: true,
-                    ballsRemaining: 15,
                     gameOver: false,
                     newGameModalOpen: false
                 }
@@ -335,7 +345,6 @@ export const fargoReducer = (state, action) => {
                     inning: [1, 1],
                     players: 2,
                     player1: true,
-                    ballsRemaining: 15,
                     gameOver: false,
                     newGameModalOpen: false
                 }
@@ -361,6 +370,107 @@ export const fargoReducer = (state, action) => {
         case CANCEL:
             state = { ...state, newGameModalOpen: false }
             localStorage.fargoState = JSON.stringify(state)
+            return state
+        default:
+            return state
+    }
+}
+
+export const hopkinsReducer = (state, action) => {
+    switch (action.type) {
+        case INCREMENT:
+            if (state.players === 1 && !state.gameOver) {
+                let arr = [...state.scores1]
+                if (arr[state.inning[0] - 1] !== 20) arr[state.inning[0] - 1] += 1
+                state = { ...state, scores1: arr}
+            } else if (!state.gameOver) {
+                if (state.player1) {
+                    let arr = [...state.scores1]
+                    if (arr[state.inning[0] - 1] !== 20) arr[state.inning[0] - 1] += 1
+                    state = { ...state, scores1: arr}
+                } else {
+                    let arr = [...state.scores2]
+                    if (arr[state.inning[1] - 1] !== 20) arr[state.inning[1] - 1] += 1
+                    state = { ...state, scores2: arr}
+                }
+            }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case DECREMENT:
+            if (state.player1 && !state.gameOver) {
+                let arr = [...state.scores1]
+                if (arr[state.inning[0] - 1] !== -2) arr[state.inning[0] - 1] -= 1
+                state = { ...state, scores1: arr}
+            } else if (!state.gameOver) {
+                let arr = [...state.scores2]
+                if (arr[state.inning[1] - 1] !== -2) arr[state.inning[1] - 1] -= 1
+                state = { ...state, scores2: arr}
+            }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case NEXT:
+            if (state.players === 1 && !state.gameOver) {
+                let arr = [...state.inning]
+                arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
+                state = { ...state, inning: arr, gameOver: state.inning[0] === 10 ? true : false }
+            } else if (!state.gameOver) {
+                if (state.player1) {
+                    let arr = [...state.inning]
+                    arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
+                    state = { ...state,  player1: !state.player1, inning: arr}
+                } else {
+                    let arr = [...state.inning]
+                    arr[1] === 10 ? arr[1] += 0 : arr[1] += 1
+                    state = { ...state, player1: !state.player1, inning: arr, gameOver: state.inning[1] === 10 ? true : false }
+                }
+            }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case RESET:
+            if (action.payload === 1) {
+                state = {
+                    ...hopkinsInitialState,
+                    scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    inning: [1, 1],
+                    players: 1,
+                    player1: true,
+                    gameOver: false,
+                    newGameModalOpen: false
+                }
+            } else {
+                state = {
+                    ...hopkinsInitialState,
+                    scores1: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    scores2: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    inning: [1, 1],
+                    players: 2,
+                    player1: true,
+                    gameOver: false,
+                    newGameModalOpen: false
+                }
+            }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case CHANGE_NAME:
+            if (action.payload.player === 'name1') {
+                state = { ...state, playerName1: action.payload.name }
+            } else {
+                state = { ...state, playerName2: action.payload.name }
+            }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case OPEN_MODAL:
+            state = { ...state, newGameModalOpen: !state.newGameModalOpen }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case NEW_GAME:
+            state = { ...state, newGameModalOpen: false }
+            localStorage.hopkinsState = JSON.stringify(state)
+            return state
+        case CANCEL:
+            state = { ...state, newGameModalOpen: false }
+            localStorage.hopkinsState = JSON.stringify(state)
             return state
         default:
             return state

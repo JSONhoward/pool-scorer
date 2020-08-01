@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {FaTimes} from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa'
 
 const StyledHeading = styled.p`
 font-size: 1.5rem;
@@ -55,7 +55,7 @@ a {
 const HelpModal = ({ open, page, handler }) => {
     return (
         <HelpModalStyled open={open}>
-        <Close onClick={handler}><FaTimes size={'2rem'} /></Close>
+            <Close onClick={handler}><FaTimes size={'2rem'} /></Close>
             <StyledP>*edit names by clicking on player names</StyledP>
             <StyledHeading>Rules</StyledHeading>
             {
@@ -201,10 +201,10 @@ const HelpModal = ({ open, page, handler }) => {
                         <br />
                         If the starting player scratches on a legal opening break, he is charged with a foul and assessed a one point penalty, which applies toward the "Successive Fouls Penalties." The incoming player is awarded cue ball in hand behind the head string, with object balls in position.
                         </p>
-                        <br />
-                        <hr />
-                        <br />
-                        <p>
+                    <br />
+                    <hr />
+                    <br />
+                    <p>
                         7. RULES OF PLAY.
                         <br />
                         1.- A legally pocketed ball entitles a shooter to continue at the table until he fails to legally pocket a called ball on a shot. A player may shoot any ball he chooses, but before he shoots, must designate the called ball and called pocket. He need not indicate any detail such as kisses, caroms, combinations, or cushions (all of which are legal). any additionally pocketed ball(s) on a legal stroke is scored as one point for the shooter.
@@ -262,8 +262,59 @@ const HelpModal = ({ open, page, handler }) => {
                     <a href='https://www.billiardworld.com/rls_141.html' target='_blank' rel="noopener noreferrer">source: billiardworld.com</a>
                 </Rules>
             }
-
-        </HelpModalStyled>
+            {
+                page === 'hopkins' &&
+                <Rules>
+                    <p>
+                        Rack: To rack 15 balls on the foot spot.
+                    <br /><br />
+                    Inning: One turn at the table. In general when you miss it is the end of an Inning. Exceptions are noted below. The Inning score is the number of balls pocketed in this turn at the table minus any penalties.
+                    <br />
+                    <br />
+                    1. Rack fifteen balls on the Foot Spot, in any order, and place the cue ball on the Head Spot.
+                    <br /><br />
+                    A miscue or missing the cue ball completely, it is a foul. Re-Rack. Break again and subtract one from the Inning score.
+                    <br />
+                    If there is a miscue and contact with the rack is made, player may choose to continue shooting, leaving the balls where they lie and not take a foul.
+                    <br /><br />
+                    2. If there is a scratch on the break subtract 1 from the Inning Score.
+                    <br /><br />
+                    If the cue ball leaves the table subtract 2 from the Inning Score. After a scratch on the break, place the cue ball on either the Head Spot or on the Foot Spot and shoot any ball on the table or place the cue ball anywhere behind the Head String and shoot any ball above the Head String. On the break, if player scratches or the cue ball goes off the table, all balls made on the break stay down but do not count as points towards the Inning score. If player does not scratch on the break, then all balls made on the break count as one point each.
+                    <br /><br />
+                    After the break, if player does not have a shot or player does not like the shot, there are three options:
+                    <br /><br />
+                    (1) Place the cue ball anywhere behind the Head String and shoot any ball above the Head String.
+                    <br /><br />
+                    (2) Place the cue ball on either the Head Spot or the Foot Spot and shoot any ball.
+                    <br /><br />
+                    (3) Place the rack over the cue ball (where it lies) and move the cue ball anywhere inside the rack and shoot any ball.
+                    <br /><br />
+                    If any of these options are used, subtract 1 from the Inning Score.
+                    <br /><br />
+                    3. After the break, player proceeds to shoot, calling each shot. Try to run the table, shooting the balls in any order until there are five balls remaining.
+                    <br /><br />
+                    The last five balls must be shot in rotation (in numerical order starting with the lowest number ball).
+                    <br />
+                    Anytime the player misses a shot the Inning is over.
+                    <br />
+                    The first ten balls score 1 point each
+                    <br />
+                    The last five balls score 2 points each if made in rotation.
+                    <br />
+                    The maximum score per Inning is 20 points.
+                    <br /><br />
+                    4. When there are six balls on the table and player pockets two or more balls in one shot, they all stay down and are each worth 1 point. Shoot the remaining balls in rotation, in which each ball is worth 2 points each.
+                    <br /><br />
+                    5. Ten Innings is a session. In one session you can score a maximum of 200 points.
+                    <br /><br />
+                    The score from five sessions (50 racks) is used for the Official Rating.
+                    <br />
+                    The highest possible Official score is 1000 points.
+                </p>
+                    <a href='https://billiards.colostate.edu/instructional-articles/pb-review/hopkins-q-skills/' target='_blank' rel="noopener noreferrer">source: billiards.colostate.edu</a>
+                </Rules>
+            }
+        </HelpModalStyled >
     )
 }
 
