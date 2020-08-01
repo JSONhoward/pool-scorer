@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
+import {Helmet} from 'react-helmet'
+
 import Button from '../../components/Button/Button'
 
 const HomeStyled = styled.div`
@@ -24,6 +26,9 @@ flex-wrap: wrap;
 const Home = () => {
     return (
         <HomeStyled>
+        <Helmet>
+        <title>Pool Scorer | Home</title>
+        </Helmet>
             <ButtonDiv>
                 <Link to={'14.1'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'14.1'} /></Link>
                 <Link to={'fargo'}><Button font={'2rem'} height={'4rem'} width={'15rem'} handler={null} text={'Fargo'} /></Link>
