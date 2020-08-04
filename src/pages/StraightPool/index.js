@@ -10,7 +10,7 @@ import Stats from '../../components/Stats/Stats'
 import Button from '../../components/Button/Button'
 import Help from '../../components/Help/Help'
 
-const StraightPoolStyled = styled.div`
+const StraightPoolStyled = styled.main`
 display: flex;
 flex-direction: column;
 align-items: center;

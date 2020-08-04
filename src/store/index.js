@@ -24,15 +24,19 @@ const types = {
     CLOSE_MAIL: 'close mail',
     OPEN_MAIL: 'open mail',
     WIN: 'win',
-    LOSS: 'loss'
+    LOSS: 'loss',
+    NO_COOKIES: 'no cookies',
+    YES_COOKIES: 'yes cookies'
 }
 
-export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, CLOSE_MAIL, OPEN_MAIL, WIN, LOSS } = types
+export const { INCREMENT, DECREMENT, FOUL, OPEN_MODAL, OPEN_MENU, RESET, NEW_GAME, CANCEL, NEXT, CHANGE_NAME, CLOSE_MENU, CLOSE_MAIL, OPEN_MAIL, WIN, LOSS, NO_COOKIES, YES_COOKIES } = types
 
 //? Initial State
-export const appInitialState = {
+export const appInitialState = localStorage.appState ? JSON.parse(localStorage.appState) : {
     menuOpen: false,
-    mailOpen: false
+    mailOpen: false,
+    showConsentBar: true,
+    disableCookies: false
 }
 
 export const straightPoolInitialState = localStorage.straightPoolState ? JSON.parse(localStorage.straightPoolState) : {
@@ -107,15 +111,27 @@ export const appReducer = (state, action) => {
     switch (action.type) {
         case OPEN_MENU:
             state = { ...state, menuOpen: true }
+            localStorage.appState = JSON.stringify(state)
             return state
         case CLOSE_MENU:
             state = { ...state, menuOpen: false }
+            localStorage.appState = JSON.stringify(state)
             return state
         case OPEN_MAIL:
-            state = {...state, mailOpen: true}
+            state = { ...state, mailOpen: true }
+            localStorage.appState = JSON.stringify(state)
             return state
         case CLOSE_MAIL:
-            state = {...state, mailOpen: false}
+            state = { ...state, mailOpen: false }
+            localStorage.appState = JSON.stringify(state)
+            return state
+        case NO_COOKIES:
+            state = { ...state, disableCookies: true, showConsentBar: false }
+            localStorage.appState = JSON.stringify(state)
+            return state
+        case YES_COOKIES:
+            state = { ...state, disableCookies: false, showConsentBar: false }
+            localStorage.appState = JSON.stringify(state)
             return state
         default:
             return state
@@ -290,16 +306,16 @@ export const fargoReducer = (state, action) => {
             if (state.players === 1 && !state.gameOver) {
                 let arr = [...state.scores1]
                 if (arr[state.inning[0] - 1] !== 30) arr[state.inning[0] - 1] += 1
-                state = { ...state, scores1: arr}
+                state = { ...state, scores1: arr }
             } else if (!state.gameOver) {
                 if (state.player1) {
                     let arr = [...state.scores1]
                     if (arr[state.inning[0] - 1] !== 30) arr[state.inning[0] - 1] += 1
-                    state = { ...state, scores1: arr}
+                    state = { ...state, scores1: arr }
                 } else {
                     let arr = [...state.scores2]
                     if (arr[state.inning[1] - 1] !== 30) arr[state.inning[1] - 1] += 1
-                    state = { ...state, scores2: arr}
+                    state = { ...state, scores2: arr }
                 }
             }
             localStorage.fargoState = JSON.stringify(state)
@@ -308,11 +324,11 @@ export const fargoReducer = (state, action) => {
             if (state.player1 && !state.gameOver) {
                 let arr = [...state.scores1]
                 arr[state.inning[0] - 1] !== 0 ? arr[state.inning[0] - 1] -= 1 : arr[state.inning[0] - 1] = 0
-                state = { ...state, scores1: arr}
+                state = { ...state, scores1: arr }
             } else if (!state.gameOver) {
                 let arr = [...state.scores2]
                 arr[state.inning[1] - 1] !== 0 ? arr[state.inning[1] - 1] -= 1 : arr[state.inning[1] - 1] = 0
-                state = { ...state, scores2: arr}
+                state = { ...state, scores2: arr }
             }
             localStorage.fargoState = JSON.stringify(state)
             return state
@@ -325,7 +341,7 @@ export const fargoReducer = (state, action) => {
                 if (state.player1) {
                     let arr = [...state.inning]
                     arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
-                    state = { ...state, player1: !state.player1, inning: arr}
+                    state = { ...state, player1: !state.player1, inning: arr }
                 } else {
                     let arr = [...state.inning]
                     arr[1] === 10 ? arr[1] += 0 : arr[1] += 1
@@ -391,16 +407,16 @@ export const hopkinsReducer = (state, action) => {
             if (state.players === 1 && !state.gameOver) {
                 let arr = [...state.scores1]
                 if (arr[state.inning[0] - 1] !== 20) arr[state.inning[0] - 1] += 1
-                state = { ...state, scores1: arr}
+                state = { ...state, scores1: arr }
             } else if (!state.gameOver) {
                 if (state.player1) {
                     let arr = [...state.scores1]
                     if (arr[state.inning[0] - 1] !== 20) arr[state.inning[0] - 1] += 1
-                    state = { ...state, scores1: arr}
+                    state = { ...state, scores1: arr }
                 } else {
                     let arr = [...state.scores2]
                     if (arr[state.inning[1] - 1] !== 20) arr[state.inning[1] - 1] += 1
-                    state = { ...state, scores2: arr}
+                    state = { ...state, scores2: arr }
                 }
             }
             localStorage.hopkinsState = JSON.stringify(state)
@@ -409,11 +425,11 @@ export const hopkinsReducer = (state, action) => {
             if (state.player1 && !state.gameOver) {
                 let arr = [...state.scores1]
                 if (arr[state.inning[0] - 1] !== -2) arr[state.inning[0] - 1] -= 1
-                state = { ...state, scores1: arr}
+                state = { ...state, scores1: arr }
             } else if (!state.gameOver) {
                 let arr = [...state.scores2]
                 if (arr[state.inning[1] - 1] !== -2) arr[state.inning[1] - 1] -= 1
-                state = { ...state, scores2: arr}
+                state = { ...state, scores2: arr }
             }
             localStorage.hopkinsState = JSON.stringify(state)
             return state
@@ -426,7 +442,7 @@ export const hopkinsReducer = (state, action) => {
                 if (state.player1) {
                     let arr = [...state.inning]
                     arr[0] === 10 ? arr[0] += 0 : arr[0] += 1
-                    state = { ...state,  player1: !state.player1, inning: arr}
+                    state = { ...state, player1: !state.player1, inning: arr }
                 } else {
                     let arr = [...state.inning]
                     arr[1] === 10 ? arr[1] += 0 : arr[1] += 1

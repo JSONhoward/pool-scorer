@@ -11,7 +11,7 @@ import InningBox from '../../components/InningBox/InningBox'
 import Modal from '../../components/Modal/Modal'
 import Help from '../../components/Help/Help'
 
-const EqualOffenseStyled = styled.div`
+const EqualOffenseStyled = styled.main`
 display: flex;
 flex-direction: column;
 align-items: center;

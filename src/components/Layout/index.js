@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import CookieConsent from 'react-cookie-consent'
+import {Link} from 'react-router-dom'
+
 import Menu from '../Menu/Menu'
-import { AppContext, CLOSE_MENU, OPEN_MENU } from '../../store'
+import { AppContext, CLOSE_MENU, OPEN_MENU, NO_COOKIES, YES_COOKIES } from '../../store'
 import anime from 'animejs/lib/anime.es.js'
 import Footer from '../Footer/Footer'
 
@@ -14,7 +17,7 @@ font-family: 'Cabin', sans-serif;
 const Layout = ({ children }) => {
     const [opacity, setOpacity] = useState(0)
     const [appState, appDispatch] = useContext(AppContext)
-    const { menuOpen, } = appState
+    const { menuOpen, showConsentBar, disableCookies } = appState
 
     const closeMenu = event => {
         if (menuOpen && event.target.getAttribute('name') !== 'nav') {
@@ -59,7 +62,7 @@ const Layout = ({ children }) => {
     }
 
     const handleKeys = e => {
-        if(menuOpen && e.keyCode === 27) {
+        if (menuOpen && e.keyCode === 27) {
             appDispatch({ type: CLOSE_MENU })
 
             let obj = {
@@ -78,11 +81,22 @@ const Layout = ({ children }) => {
         }
     }
 
+    const handleConsent = choice => {
+        if (choice) {
+            appDispatch({ type: YES_COOKIES })
+        } else {
+            appDispatch({ type: NO_COOKIES })
+        }
+    }
+
     return (
         <>
             <LayoutStyled onClick={e => closeMenu(e)} onKeyUp={(e) => handleKeys(e)}>
                 <Menu opacity={opacity} handleMenu={handleMenu} />
-                {children}
+                    {children}
+                {
+                    showConsentBar && <CookieConsent cookieName={'ga-disable-G-6DYPVSGFG4'} cookieValue={disableCookies} declineCookieValue={disableCookies} sameSite='none' cookieSecurity={true} buttonText={'Accept'} declineButtonText={'Decline'} onAccept={() => handleConsent(true)} onDecline={() => handleConsent(false)} location={'bottom'} enableDeclineButton>This website uses cookies to enhance user experience. <Link to='/cookie-policy'>Cookie Policy</Link></CookieConsent>
+                }
                 <Footer />
             </LayoutStyled>
         </>

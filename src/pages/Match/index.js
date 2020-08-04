@@ -10,7 +10,7 @@ import Button from '../../components/Button/Button'
 import MatchModal from '../../components/Modal/MatchModal'
 import BreakBox from '../../components/BreakBox/BreakBox'
 
-const MatchStyled = styled.div`
+const MatchStyled = styled.main`
 display: flex;
 flex-direction: column;
 align-items: center;

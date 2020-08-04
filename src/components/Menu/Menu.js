@@ -5,7 +5,7 @@ import { useLocation, Link } from 'react-router-dom'
 
 import { AppContext } from '../../store'
 
-const MenuStyled = styled.div`
+const MenuStyled = styled.header`
 position: absolute;
 height: 3rem;
 width: 100vw;
@@ -116,7 +116,7 @@ const Menu = ({ opacity, handleMenu }) => {
         <>
             <MenuStyled>
                 <Title>{location.pathname.slice(1) === '' ? 'Pool Scorer' : location.pathname.slice(1)}</Title>
-                <Hamburger role='button'>
+                <Hamburger name='menu' aria-label='menu' role='button'>
                     {
                         menuOpen ? <FaTimes tabIndex='0' color={'white'} onKeyUp={(e) => handleKeys(e)} onClick={() => handleMenu('close')} size={'2rem'} /> : <FaBars tabIndex='0' color={'white'} onKeyUp={(e) => handleKeys(e)} onClick={() => handleMenu('open')} size={'2rem'} />
                     }

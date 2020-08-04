@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { FaEnvelope } from 'react-icons/fa'
 import ContactModal from '../Modal/ContactModal'
 import { AppContext, OPEN_MAIL } from '../../store'
+import { Link } from 'react-router-dom'
 
 const FooterStyled = styled.footer`
-position: absolute;
+position: fixed;
 bottom: 0;
 display: flex;
 height: 3rem;
@@ -26,7 +27,18 @@ p {
 }
 `
 
+const LegalStuff = styled.div`
+display: flex;
+line-height: 80%;
 
+a {
+    color: white;
+}
+
+@media screen and (max-width: 500px) {
+    flex-direction: column;
+}
+`
 
 const Footer = () => {
     const [appState, appDispatch] = useContext(AppContext)
@@ -45,7 +57,13 @@ const Footer = () => {
         <>
             <ContactModal reference={closeRef} open={mailOpen} handle={handleMailModal} />
             <FooterStyled>
-                <FooterSection flex={1.5}><p>&copy; 2020 Pool Scorer</p></FooterSection>
+                <FooterSection flex={2}>
+                <p>&copy; 2020 Pool Scorer</p>
+                <LegalStuff>
+                <p><Link to='/terms'>Terms</Link></p>
+                <p><Link to='/privacy-policy'>Privacy</Link></p>
+                </LegalStuff>
+                </FooterSection>
                 <FooterSection>
                     <FaEnvelope onKeyUp={e => handleKeys(e)} tabIndex='0' style={{ cursor: 'pointer' }} onClick={() => handleMailModal(OPEN_MAIL)} size={'1.5rem'} />
                     <p style={{ cursor: 'pointer' }} onClick={() => handleMailModal(OPEN_MAIL)}>Contact </p>

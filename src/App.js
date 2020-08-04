@@ -10,6 +10,9 @@ import Match from './pages/Match'
 import EqualOffense from './pages/EqualOffense'
 import NotFound from './pages/NotFound'
 import HopkinsQ from './pages/HopkinsQ'
+import Terms from './pages/Terms'
+import Privacy from './pages/Privacy'
+import Cookies from './pages/Cookies'
 
 const App = () => {
   const [appState, appDispatch] = useReducer(appReducer, appInitialState)
@@ -35,6 +38,9 @@ const App = () => {
                       <Route path='/14.1' component={StraightPool} />
                       <Route path='/vs' component={Match} />
                       <Route path='/equal-offense' component={EqualOffense} />
+                      <Route path='/terms' component={Terms} />
+                      <Route path='/privacy-policy' component={Privacy} />
+                      <Route path='/cookie-policy' component={Cookies} />
                       <Route path='*' component={NotFound} />
                     </Layout>
                   </Switch>

@@ -11,7 +11,7 @@ import InningBox from '../../components/InningBox/InningBox'
 import Button from '../../components/Button/Button'
 import Help from '../../components/Help/Help'
 
-const HopkinsQStyled = styled.div`
+const HopkinsQStyled = styled.main`
 display: flex;
 flex-direction: column;
 align-items: center;

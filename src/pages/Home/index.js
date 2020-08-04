@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 import {Helmet} from 'react-helmet'
 
-const HomeStyled = styled.div`
+const HomeStyled = styled.main`
 display: flex;
 height: 100%;
 width: 100%;
