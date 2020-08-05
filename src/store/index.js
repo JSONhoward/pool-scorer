@@ -184,7 +184,7 @@ export const straightPoolReducer = (state, action) => {
                 state = {
                     ...state,
                     fouls1: state.fouls1 === 2 ? 0 : state.fouls1 + 1,
-                    score1: state.fouls1 === 2 ? state.score1 - 15 : state.score1 - 1,
+                    score1: state.fouls1 === 2 ? state.score1 - 16 : state.score1 - 1,
                     runs1: runArr,
                     currentRun: 0
                 }
@@ -194,7 +194,7 @@ export const straightPoolReducer = (state, action) => {
                     state = {
                         ...state,
                         fouls1: state.fouls1 === 2 ? 0 : state.fouls1 + 1,
-                        score1: state.fouls1 === 2 ? state.score1 - 15 : state.score1 - 1,
+                        score1: state.fouls1 === 2 ? state.score1 - 16 : state.score1 - 1,
                         runs1: runArr,
                         currentRun: 0,
                         player1: !state.player1
@@ -204,7 +204,7 @@ export const straightPoolReducer = (state, action) => {
                     state = {
                         ...state,
                         fouls2: state.fouls2 === 2 ? 0 : state.fouls2 + 1,
-                        score2: state.fouls2 === 2 ? state.score2 - 15 : state.score2 - 1,
+                        score2: state.fouls2 === 2 ? state.score2 - 16 : state.score2 - 1,
                         runs2: runArr,
                         currentRun: 0,
                         player1: !state.player1
