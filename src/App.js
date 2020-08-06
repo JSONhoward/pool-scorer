@@ -41,7 +41,7 @@ const App = () => {
                       <Route path='/terms' component={Terms} />
                       <Route path='/privacy-policy' component={Privacy} />
                       <Route path='/cookie-policy' component={Cookies} />
-                      <Route path='*' component={NotFound} />
+                      <Route component={NotFound} />
                     </Layout>
                   </Switch>
                 </Router>
