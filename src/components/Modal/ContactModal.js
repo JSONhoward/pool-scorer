@@ -83,7 +83,7 @@ const ContactModal = ({ open, handle, reference }) => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        reference.current.focus()
+        reference && reference.current.focus()
     },[reference])
 
     const { from, subject, message } = email

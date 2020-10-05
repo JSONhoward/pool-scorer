@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Names Tests Snapshot Test 1`] = `
+<div
+  className="sc-AxirZ fbPpan"
+>
+  <input
+    autoComplete="off"
+    className="sc-AxjAm kZWIPB"
+    defaultValue="player 1"
+    maxLength={10}
+    name="name1"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    title="Edit"
+    type="text"
+  />
+  <input
+    autoComplete="off"
+    className="sc-AxjAm bXSlB"
+    defaultValue="player 2"
+    maxLength={10}
+    name="name2"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onFocus={[Function]}
+    title="Edit"
+    type="text"
+  />
+</div>
+`;

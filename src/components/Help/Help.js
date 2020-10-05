@@ -27,7 +27,7 @@ const Help = ({page}) => {
     return (
         <>
             <HelpModal handler={handleModal} page={page} open={helpOpen} />
-            <HelpStyled onClick={handleModal}>
+            <HelpStyled data-testid='helpButton' onClick={handleModal}>
                 <p>?</p>
             </HelpStyled>
         </>

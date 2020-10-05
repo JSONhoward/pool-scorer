@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Help Tests Snapshot Tests 1`] = `
+Array [
+  <div
+    className="sc-AxhUy cMzBRP"
+    open={false}
+  >
+    <div
+      className="sc-AxhCb busWbY"
+      data-testid="closeButton"
+      onClick={[Function]}
+    >
+      <svg
+        fill="currentColor"
+        height="2rem"
+        size="2rem"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        tabIndex="0"
+        viewBox="0 0 352 512"
+        width="2rem"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
+        />
+      </svg>
+    </div>
+    <p
+      className="sc-AxirZ gTVPlk"
+    >
+      *edit names by clicking on player names
+    </p>
+    <p
+      className="sc-AxjAm iaLvkC"
+    >
+      Rules
+    </p>
+  </div>,
+  <button
+    className="sc-AxgMl eFejOD"
+    data-testid="helpButton"
+    onClick={[Function]}
+  >
+    <p>
+      ?
+    </p>
+  </button>,
+]
+`;

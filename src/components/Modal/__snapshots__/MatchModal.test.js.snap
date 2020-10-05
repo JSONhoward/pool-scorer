@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchModal Tests Snapshot Test 1`] = `
+<div
+  className="sc-AxjAm kZVmZn"
+>
+  <p
+    className="sc-AxirZ gtOftv"
+  >
+    Race To?
+  </p>
+  <input
+    className="sc-AxhUy kyCmyG"
+    defaultValue={7}
+    maxLength={3}
+    min={0}
+    onChange={[Function]}
+    type="number"
+  />
+  <p
+    style={
+      Object {
+        "color": "red",
+        "fontStyle": "italic",
+      }
+    }
+  >
+    100 max
+  </p>
+  <div
+    className="sc-fzozJi iaOLxz"
+  />
+  <p
+    className="sc-AxirZ gtOftv"
+  >
+    Break?
+  </p>
+  <div
+    className="sc-AxgMl buDCNB"
+  >
+    <p
+      className="sc-AxheI btgCWv"
+      onClick={[Function]}
+    >
+      Alternate
+    </p>
+    <p
+      className="sc-AxheI jMZbke"
+      onClick={[Function]}
+    >
+      Winner
+    </p>
+  </div>
+  <div
+    className="sc-fzozJi iaOLxz"
+  />
+  <p
+    className="sc-AxirZ gtOftv"
+  >
+    First Break?
+  </p>
+  <div
+    className="sc-Axmtr fWKjQY"
+  >
+    <p
+      className="sc-AxmLO JJzrG"
+      name="player1"
+      onClick={[Function]}
+    />
+    <p
+      className="sc-AxmLO hZQEpH"
+      name="player2"
+      onClick={[Function]}
+    />
+    <p
+      className="sc-AxmLO hZQEpH"
+      name="random"
+      onClick={[Function]}
+    >
+      Random
+    </p>
+  </div>
+  <div
+    className="sc-AxiKw dESDWP"
+  >
+    <button
+      className="sc-AxhCb dSEtnq"
+      color="red"
+      onClick={[Function]}
+    >
+      Cancel
+    </button>
+    <button
+      className="sc-AxhCb dZdbaG"
+      onClick={[Function]}
+    >
+      New Game
+    </button>
+  </div>
+</div>
+`;

@@ -55,7 +55,7 @@ const HelpModal = ({ open, page, handler }) => {
 
     return (
         <HelpModalStyled open={open}>
-            <Close onClick={handler}><FaTimes tabIndex='0' size={'2rem'} /></Close>
+            <Close data-testid='closeButton' onClick={handler}><FaTimes tabIndex='0' size={'2rem'} /></Close>
             <StyledP>*edit names by clicking on player names</StyledP>
             <StyledHeading>Rules</StyledHeading>
             {

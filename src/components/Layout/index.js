@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 
 import Menu from '../Menu/Menu'
 import { AppContext, CLOSE_MENU, OPEN_MENU, NO_COOKIES, YES_COOKIES } from '../../store'
-import anime from 'animejs/lib/anime.es.js'
+import anime from 'animejs'
 import Footer from '../Footer/Footer'
 
 const LayoutStyled = styled.div`

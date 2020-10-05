@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InningBox Tests Snapshot Test 1`] = `
+Array [
+  <div
+    className="sc-AxjAm eHbWAW"
+  >
+    <div
+      className="sc-AxiKw jckrDE"
+      onClick={[Function]}
+    >
+      <p>
+        Innings
+      </p>
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+        />
+      </svg>
+    </div>
+    <table
+      className="sc-AxhUy dvlFGg"
+    >
+      <tbody>
+        <tr>
+          <th>
+            Score
+          </th>
+          <th>
+            Inning
+          </th>
+        </tr>
+        <tr>
+          <td />
+          <td
+            style={Object {}}
+          >
+            1
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+  <div
+    className="sc-AxirZ ggEqld"
+  >
+    <div
+      className="sc-AxhCb fEigVe"
+      onClick={[Function]}
+    >
+      <p>
+        Innings
+      </p>
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+        />
+      </svg>
+    </div>
+    <table
+      className="sc-AxhUy bzYzLc"
+    >
+      <tbody>
+        <tr>
+          <th>
+            Inning
+          </th>
+          <th>
+            Score
+          </th>
+        </tr>
+        <tr>
+          <td
+            style={Object {}}
+          >
+            1
+          </td>
+          <td />
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+]
+`;

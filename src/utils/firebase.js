@@ -2,15 +2,15 @@ import firebase from 'firebase/app'
 import 'firebase/analytics'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAwriuA_z6BH8aCqtKz4TAaInw3wyFEQhE",
-    authDomain: "pool-scorer.firebaseapp.com",
-    databaseURL: "https://pool-scorer.firebaseio.com",
-    projectId: "pool-scorer",
-    storageBucket: "pool-scorer.appspot.com",
-    messagingSenderId: "411177194065",
-    appId: "1:411177194065:web:4bfe0ab0132bea7c9a1e70",
-    measurementId: "G-6DYPVSGFG4"
-  }
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SEND_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEASUREMENT_ID
+}
 
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()

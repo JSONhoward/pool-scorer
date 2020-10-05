@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import { FaPlus, FaMinus } from 'react-icons/fa'
-import anime from 'animejs/lib/anime.es.js'
+import anime from 'animejs'
 
 const animDuration = 500
 
@@ -94,7 +94,7 @@ th, tr, td {
 }
 `
 
-const InningBox = ({ players, scores,top }) => {
+const InningBox = ({ players, scores, top }) => {
     const [isOpenLeft, setIsOpenLeft] = useState(false)
     const [isOpenRight, setIsOpenRight] = useState(false)
     const [pixelsLeft, setPixelsLeft] = useState(-100)

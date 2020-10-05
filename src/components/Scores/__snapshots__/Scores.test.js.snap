@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scores Tests Snapshot Test 1`] = `
+<div
+  className="sc-AxjAm iwecYv"
+>
+  <p
+    className="sc-AxirZ cBszJp"
+  />
+  <p
+    className="sc-AxirZ foamJh"
+  />
+</div>
+`;
